@@ -1,0 +1,86 @@
+# Base16 cyber_c 256 - alacritty color config
+# cyber_c
+
+font:
+  # Normal (roman) font face
+  normal:
+    family: Hack
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+
+  # Bold font face
+  bold:
+    family: Hack
+    # The `style` can be specified to pick a specific face.
+    style: Bold
+
+  # Italic font face
+  italic:
+    family: Hack
+    # The `style` can be specified to pick a specific face.
+    style: Italic
+
+  # Point size
+  size: 8.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the right,
+  # increasing `y` moves the glyph upwards.
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # Scale the font size based on the monitor's DPI. This will lead to bigger text on HiDPI
+  # screens and make reading text a little easier.
+  # On X11 it is possible to change the DPI for each instance of alacritty by using
+  # `WINIT_HIDPI_FACTOR=1.0 alacritty` to scale the font.
+  #scale_with_dpi: true
+
+
+
+
+# Base16 Deathburger_II - alacritty color config
+# Deathburger_II
+# Theme by Frenzy using Oomox :D
+colors:
+  # Default colors
+  primary:
+    background: '0x282b3b'
+    foreground: '0xbfa5b2'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x282b3b'
+    cursor: '0xbfa5b2'
+
+  # Normal colors
+  normal:
+    black:   '0x282b3b'
+    red:     '0xc48e74'
+    green:   '0x90EEBE'
+    yellow:  '0xd9cd5f'
+    blue:    '0x9197e3'
+    magenta: '0xddacb0'
+    cyan:    '0x93b8cb'
+    white:   '0xbfa5b2'
+
+  # Bright colors
+  bright:
+    black:   '0x736876'
+    red:     '0xd9cd5f'
+    green:   '0x615162'
+    yellow:  '0x615162'
+    blue:    '0x141727'
+    magenta: '0xad8a88'
+    cyan:    '0xba9955'
+    white:   '0xbfa5b2'
+
+draw_bold_text_with_bright_colors: false
+
+

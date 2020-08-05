@@ -1,0 +1,19 @@
+# Config for rofi-wifi-menu
+
+# position values:
+# 1 2 3
+# 8 0 4
+# 7 6 5
+POSITION=1
+
+#y-offset
+YOFF=42
+
+#x-offset
+XOFF=150
+
+#fields to be displayed
+FIELDS=SSID,SECURITY,BARS
+
+#font
+FONT="IBM 3270 13"
