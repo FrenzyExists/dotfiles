@@ -1,0 +1,142 @@
+# --| Frenzy's Alacritty |-- #
+
+# Colors
+
+# Implementation of Colors
+colors:
+  primary:
+    # for hard contrast: #1b1b23
+    # for soft contrast: #2c2e3e
+    background:        &aquarium_bg '#1b1b23'
+    foreground:        '#8791a3'
+    bright_foreground: '#a0a8b6'
+    dim_foreground:    '#4c5664'
+
+  cursor:
+    text:   CellBackground
+    cursor: CellForeground
+
+  vi_mode_cursor:
+    text:   CellBackground
+    cursor: CellForeground
+
+  search:
+    matches:
+      foreground: '#000000'
+      background: '#ffffff'
+
+    focused_match:
+     foreground: CellBackground
+     background: CellForeground
+
+    bar:
+      background: None
+      foreground: None
+
+  line_indicator:
+    foreground: None
+    background: None
+
+  selection:
+    text:       CellBackground
+    background: CellForeground
+
+  bright:
+    black:   '#3b3b4d'
+    red:     '#ebb9b9'
+    green:   '#caf6bb'
+    yellow:  '#ebe3b9'
+    blue:    '#cddbf9'
+    magenta: '#f6bbe7'
+    cyan:    '#b8dceb'
+    white:   '#c8cedc'
+
+  normal:
+    black:   *aquarium_bg
+    red:     '#d95e59'
+    green:   '#8fc587'
+    yellow:  '#ffcf85'
+    blue:    '#4a83c3'
+    magenta: '#bf83b5'
+    cyan:    '#4eb3cd'
+    white:   '#a89984'
+  dim:
+    black:   '#32302f'
+    red:     '#cc9b9d'
+    green:   '#a3ccad'
+    yellow:  '#d1ba97'
+    blue:    '#076678'
+    magenta: '#c497b3'
+    cyan:    '#86bfbc'
+    white:   '#928374'
+
+scrolling:
+        history: 10000
+
+        multiplier: 100
+
+        faux_multiplier: 100
+
+        auto_scroll: true
+
+window:
+        dimensions:
+                columns: 100
+                lines: 85
+
+        padding:
+                x: 10
+                y: 10
+
+tabspaces: 4
+
+font:
+        normal:
+                family: Victor Mono
+                style:  Medium
+        italic:
+                family: Victor Mono
+                style: Italic
+        bold:
+                family: Victor Mono
+                style: Bold Italic
+        
+        size: 14
+        history: 10000
+        offset:
+                x: 1
+                y: -1
+        glyph_offset:
+                x: 0
+                y: 2
+
+env:
+        WINIT_X11_SCALE_FACTOR: '1.0'
+
+
+key_bindings:
+        - { key: V,        mods: Control,       action: Paste                   }
+        - { key: C,        mods: Control,       action: Copy                    }
+        - { key: Paste,                         action: Paste                   }
+        - { key: Copy,                          action: Copy                    }
+        - { key: Q,        mods: Alt,       action: Quit                    }
+        - { key: N,        mods: Alt,       action: SpawnNewInstance        }
+        - { key: Return,   mods: Control,       action: ToggleFullscreen        }
+        - { key: Equals,   mods: Control,       action: IncreaseFontSize        }
+        - { key: Minus, mods: Control,          action: DecreaseFontSize}
+
+cursor:
+        style: Underline
+
+mouse:
+        double_click: { threshold: 300 }
+        hide_when_typing: true
+
+selection:
+        semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+dynamic_title: false
+dynamic_padding: false
