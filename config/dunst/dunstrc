@@ -1,0 +1,119 @@
+# Frenzy's Dunst
+
+[colors]
+    foreground = "#8791a3"
+
+[global]
+    ### Display ###
+		
+    # Which monitor should the notifications be displayed on.
+    monitor = 0
+    follow = keyboard
+
+    # The geometry of the window:
+    # [{width}]x{height}[+/-{x}+/-{y}]
+    # The geometry of the message window.
+    geometry = "272x3-34+34"
+
+    indicate_hidden = yes
+
+	# Show how many messages are currently hidden (because of geometry).
+    shrink = false
+
+    # Transparency of notifications [0-100]
+    transparency = 0
+
+    # Notification stack
+    notification_height = 3
+
+    # You want a Gap?
+    separator_height = 1
+
+    # Notification box padding
+    padding = 24
+    horizontal_padding = 24
+
+    # The Thing that Barbose implemented in his fork
+    frame_width = 3
+    outer_frame_width = 14
+
+    # Round corners, that's it
+    corner_radius = 0
+
+    # From what Barbose implemented, the other frame
+    outer_frame_color = "#1b1b23"
+
+    separator_color = auto
+    sort = yes
+    idle_threshold = 120
+
+    # Text 
+    font = Victor Mono SemiBold Italic  13
+    line_height = 1
+
+    markup = full
+
+    # The format of the message.  Possible variables are:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    #   %n  progress value if set without any extra characters
+    #   %%  Literal %
+    # Markup is allowed
+    format = "%s\n%b"
+    alignment = center
+    show_age_threshold = 60
+    word_wrap = true
+    ellipsize = middle
+    ignore_newline = false
+    stack_duplicates = true
+    hide_duplicate_count = true
+    show_indicators = true
+
+    ### Icons ###
+    icon_position = left
+    max_icon_size = 64
+
+    ### History ###
+    sticky_history = yes
+    history_length = 20
+
+    ### Misc/Advanced ###
+    dmenu = /usr/bin/alacritty -e fzf:
+    browser = linkhandler
+    always_run_script = false
+    title = Dunst
+    class = Dunst
+    startup_notification = false
+    force_xinerama = false
+
+[experimental]
+    per_monitor_dpi = false
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+
+[urgency_low]
+    background = "#1b1b23"
+    frame_color = "#caf6bb"
+    icon = "~/.config/dunst/icons/low.svg"
+    timeout = 3
+
+[urgency_normal]
+    background = "#1b1b23"
+    frame_color = "#ebe3b9"
+    icon = "~/.config/dunst/icons/normal.svg"
+    timeout = 5
+
+[urgency_critical]
+    background = "#1b1b23"
+    frame_color = "#ebb9b9"
+    icon = "~/.config/dunst/icons/critical.svg"
+    timeout = 0
+
+# vim: ft=conf
