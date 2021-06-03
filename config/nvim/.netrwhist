@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/frenzy/.scripts/notification'
+let g:netrw_dirhist_0='/home/frenzy/.scripts'
+let g:netrw_dirhist_9='/home/frenzy'
+let g:netrw_dirhist_8='/home/frenzy/.config'
+let g:netrw_dirhist_7='/home/frenzy'
+let g:netrw_dirhist_6='/home/frenzy/.scripts/scripts/imgur.sh'
+let g:netrw_dirhist_5='/home/frenzy/Desktop'
+let g:netrw_dirhist_4='/home/frenzy/.config/nvim'
+let g:netrw_dirhist_3='/home/frenzy/.config/dunst'
+let g:netrw_dirhist_2='/home/frenzy/.config/polybar'
