@@ -1,0 +1,100 @@
+<!-- Frenzy's Totally not Stolen from rayes0 eww configuration -->
+
+<eww>
+	<includes>
+		<file path="./variables.xml"/>
+	</includes>
+
+  <definitions>
+    <!-- This is the place where you structure your widgets, align them and stuff. -->
+
+    <!-- Right Sidebar Container -->
+    <def name="righty">
+        <box class="container right-outer-container">
+            <box class="right-container" orientation="v" space-evenly="true">
+                <shutdown/>
+                <reboot/>
+                <quit/>
+            </box>
+        </box>
+    </def>
+
+    <!-- Right Sidebar Buttons -->
+    <def name="shutdown">
+        <box orientation="h" space-evenly="true">
+            <box class="btn shutdown-btn" orientation="h" halign="center">
+                <button onclick="shutdown now"></button>
+            </box>
+        </box>
+    </def>
+    <def name="reboot">
+        <box orientation="h" space-evenly="true">
+            <box class="btn reboot-btn" orientation="h" halign="center">
+                <button onclick="reboot"></button>
+            </box>
+        </box>
+    </def>
+    <def name="quit">
+        <box orientation="h" space-evenly="true">
+          <box class="btn quit-btn" orientation="h" halign="center">
+              <button onclick="eww close shutdown & eww close reboot & eww close quit"></button>
+            </box>
+        </box>
+    </def>
+    <!-- End of Right Widgets -->
+
+    <!-- Left Sidebar Container -->
+    <def name="lefty">
+        <box class="container left-container">
+            <calendar/>
+        </box>
+    </def>
+    
+    <!-- Left Sidebar Buttons -->
+    <def name="calendar">
+        <box class="main" orientation="h" space-evenly="false">
+		    <box class="calendar-dark" orientation="v" space-evenly="false">
+			    		<label class="calendar-year-dark" text="{{year_cal}}" halign="start"/>
+				    	<label class="calendar-date" text="{{weekday_cal}}, {{month_cal}} {{day_num_cal}}" halign="start"/>
+                <!--	<calendar show-day-names="true" show-heading="true" halign="start" valign="center" onclick="~/.config/eww/scripts/calendar.sh {}"/> -->
+            </box>
+        </box>
+    </def>
+
+
+  </definitions>
+
+
+  <windows>
+    <!-- These are the windows -->
+
+    <!-- Power Options Bar [ window thingy ] -->
+    <window name="rightSidebar" screen="0">
+        <geometry anchor="center right" x="0px" y="0px" width="100px" height="45%"/>
+        <reserve side="top" distance="4%" layer="top"/>
+        <widget>
+            <righty/>
+        </widget>
+    </window>
+    
+    <!-- Nice Top Interfase thingy -->
+    <window name="topSidebar" screen="0">
+        <geometry anchor="center top" x="0px" y="0px" width="50%" height="200px"/>
+        <reserve side="top" distance="4%" layer="top"/>
+        <widget>
+            <lefty/> <!--This is the def we created earlier-->
+        </widget>
+    </window>
+   
+
+    <!-- Left Todo List interfase thing -->
+    <window name="leftSidebar" screen="0">
+        <geometry anchor="top left" x="0px" y="0px" width="400px" height="92%"/>
+        <reserve side="top" distance="4%" layer="top"/>
+        <widget>
+            <lefty/> <!--This is the def we created earlier-->
+        </widget>
+    </window>
+
+  </windows>
+</eww>

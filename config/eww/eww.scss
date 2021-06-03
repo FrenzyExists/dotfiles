@@ -1,0 +1,57 @@
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+}
+
+// --| Global Styles |-- //
+window {
+  //background-color: #2c2e3e;
+  color: #b0b4bc;
+  font-family: VictorMono;
+}
+
+// Styling n' Stuff
+
+// Right Sidebar
+
+// Container
+.right-outer-container {
+    padding: 24px;
+}
+
+.right-container {
+    background-color: #2c2e3e;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+// Right Sidebar Buttons
+.btn {
+    font-size: 40px;
+}
+
+.shutdown-btn {
+    color: #ebb9b9;
+}
+
+.reboot-btn {
+    color: #caf6bb;
+}
+
+.quit-btn {
+    color: #f6bbe7;
+}
+
+.btn button {
+    border-radius: 26px;
+    padding: 26px;
+}
+
+.btn button:hover {
+    background-color: #393b4d;
+}
+
+// Top Sidebar Container
+.left-container {
+    background-color: #2c2e3e;    
+}
+

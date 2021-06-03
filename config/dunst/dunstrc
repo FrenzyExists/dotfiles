@@ -93,6 +93,7 @@
 [experimental]
     per_monitor_dpi = false
 
+
 [shortcuts]
     close = ctrl+space
     close_all = ctrl+shift+space
@@ -115,5 +116,4 @@
     frame_color = "#ebb9b9"
     icon = "~/.config/dunst/icons/critical.svg"
     timeout = 0
-
 # vim: ft=conf

@@ -59,7 +59,7 @@ colors:
     blue:    '#4a83c3'
     magenta: '#bf83b5'
     cyan:    '#4eb3cd'
-    white:   '#a89984'
+    white:   '#abb2c2'
   dim:
     black:   '#32302f'
     red:     '#cc9b9d'
@@ -92,20 +92,20 @@ tabspaces: 4
 
 font:
         normal:
-                family: Victor Mono
+                family: Victor Mono Nerd Font Complete Mono
                 style:  Medium
         italic:
-                family: Victor Mono
+                family: Victor Mono Nerd Font Complete Mono
                 style: Italic
         bold:
-                family: Victor Mono
+                family: Victor Mono Nerd Font Complete Mono
                 style: Bold Italic
         
         size: 14
         history: 10000
         offset:
-                x: 1
-                y: -1
+                x: 0
+                y: 1
         glyph_offset:
                 x: 0
                 y: 2
