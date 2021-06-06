@@ -64,6 +64,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 " File Tree
 Plug 'kyazdani42/nvim-tree.lua'
 
+" Tab thingy
+Plug 'akinsho/nvim-bufferline.lua'
+
 " Whatever is this
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -89,7 +92,7 @@ Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'
 
 " Snippets and text editing support
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " Color highlighter
 Plug 'norcalli/nvim-colorizer.lua'
@@ -103,6 +106,20 @@ Plug 'alvan/vim-closetag'
 " Identations
 Plug 'Yggdroot/indentLine'
 
+" Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+" Markdown syntax
+Plug 'plasticboy/vim-markdown'
+
+" LaTeX syntax/
+" Plug 'lervag/vimtex'
+
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+"Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
+"Plug 'neoclide/coc-snippets'
+
 " Controlling Git
 Plug 'tpope/vim-fugitive'
 
@@ -113,7 +130,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'tpope/vim-capslock'
 
 " Search Thingy
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " TODO: learn features
+Plug 'liuchengxu/vim-clap'
 
 " Autoclose
 Plug 'townk/vim-autoclose'
@@ -121,6 +138,9 @@ Plug 'townk/vim-autoclose'
 call plug#end()
 
 " ---| Configuring everything |---
+
+" Spell Check
+set spell
 
 " Go Aquarium go!
 colorscheme aquarium
@@ -181,7 +201,7 @@ nnoremap <c-b> :vnew term://zsh<CR>
 set matchpairs+=<:>
 
 " Remap for next snippet
-let g:coc_snippet_next = '<tab>'
+"let g:coc_snippet_next = '<tab>'
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -189,6 +209,25 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+
+augroup COMPILER
+    autocmd!
+    let s:args = ' "%" -o "%:r" && ./"%:r" && rm "%:r"'
+    let s:java_args = ' "%" && java "%:r" && rm "%:r".class'
+    let s:hs_args = ' "%" -o "%:r" && ./"%:r" && rm "%:r" "%:r".o "%:r".hi'
+    let s:latex_args = ' "%" && rm "%:r".aux "%:r".log && evince "%:r".pdf && rm "%:r".pdf'
+    autocmd FileType cpp,cc let &makeprg = 'clang++'.s:args
+    autocmd FileType c let &makeprg = 'clang'.s:args
+    autocmd FileType rust let &makeprg = 'rustc'.s:args
+    autocmd FileType javascript let &makeprg = 'node "%"'
+    autocmd FileType java let &makeprg = 'javac'.s:java_args
+    autocmd FileType python let &makeprg = 'python3 "%"'
+    autocmd FileType haskell let &makeprg = 'ghc'.s:hs_args
+    autocmd FileType tex let &makeprg = 'pdflatex'.s:latex_args
+    autocmd FileType cpp,cc,c,rust,javascript,java,python,haskell,tex nnoremap CT :make<cr>
+    autocmd FileType rust nnoremap ct :!cargo run<cr>
+    autocmd FileType rust nnoremap RF :RustFmt<cr>
+augroup END
 
 " Change end of buffer color
 "highlight EndOfBuffer ctermfg=black ctermbg=black
@@ -421,6 +460,11 @@ EOF
 " Source Lua bar
 luafile ~/.config/nvim/lua/cfg/aquariumline.lua
 
+"lua require("bufferline").setup{}
+
+" Source Lua tab bar
+luafile ~/.config/nvim/lua/cfg/aquariumbufferline.lua
+
 
 nnoremap <C-a> :NvimTreeToggle<CR>
 
@@ -429,5 +473,43 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 "highlight NvimTreeFolderIcon guibg=blue
+
+
+" Markdown
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" --| Dashboard |--
+
+" Top
+let g:dashboard_custom_header = [
+            \' ', 
+            \ '⠸⣷⣦⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⠀⠀⠀ ',
+            \ '⠀⠙⣿⡄⠈⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠔⠊⠉⣿⡿⠁⠀⠀⠀ ',
+            \ '⠀⠀⠈⠣⡀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⠀⣰⠟⠀⠀⠀⣀⣀ ',
+            \ '⠀⠀⠀⠀⠈⠢⣄⠀⡈⠒⠊⠉⠁⠀⠈⠉⠑⠚⠀⠀⣀⠔⢊⣠⠤⠒⠊⠉⠀⡜ ',
+            \ '⠀⠀⠀⠀⠀⠀⠀⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠩⡔⠊⠁⠀⠀⠀⠀⠀⠀⠇ ',
+            \ '⠀⠀⠀⠀⠀⠀⠀⡇⢠⡤⢄⠀⠀⠀⠀⠀⡠⢤⣄⠀⡇⠀⠀⠀⠀⠀⠀⠀⢰⠀ ',
+            \ '⠀⠀⠀⠀⠀⠀⢀⠇⠹⠿⠟⠀⠀⠤⠀⠀⠻⠿⠟⠀⣇⠀⠀⡀⠠⠄⠒⠊⠁⠀ ',
+            \ '⠀⠀⠀⠀⠀⠀⢸⣿⣿⡆⠀⠰⠤⠖⠦⠴⠀⢀⣶⣿⣿⠀⠙⢄⠀⠀⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⠀⠀⠀⠀⢻⣿⠃⠀⠀⠀⠀⠀⠀⠀⠈⠿⡿⠛⢄⠀⠀⠱⣄⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⠀⠀⠀⠀⢸⠈⠓⠦⠀⣀⣀⣀⠀⡠⠴⠊⠹⡞⣁⠤⠒⠉⠀⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⠀⠀⠀⣠⠃⠀⠀⠀⠀⡌⠉⠉⡤⠀⠀⠀⠀⢻⠿⠆⠀⠀⠀⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⠀⠀⠰⠁⡀⠀⠀⠀⠀⢸⠀⢰⠃⠀⠀⠀⢠⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⢶⣗⠧⡀⢳⠀⠀⠀⠀⢸⣀⣸⠀⠀⠀⢀⡜⠀⣸⢤⣶⠀⠀⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⠈⠻⣿⣦⣈⣧⡀⠀⠀⢸⣿⣿⠀⠀⢀⣼⡀⣨⣿⡿⠁⠀⠀⠀⠀⠀⠀ ',
+            \ '⠀⠀⠀⠀⠀⠈⠻⠿⠿⠓⠄⠤⠘⠉⠙⠤⢀⠾⠿⣿⠟⠋         ',
+            \ ]
 
 
