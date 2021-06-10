@@ -1,7 +1,7 @@
 # Frenzy's Dunst
 
-[colors]
-    foreground = "#8791a3"
+#[colors]
+    #foreground = "#8791a3"
 
 [global]
     ### Display ###
@@ -103,6 +103,7 @@
     background = "#1b1b23"
     frame_color = "#caf6bb"
     icon = "~/.config/dunst/icons/low.svg"
+    foreground="#8791a3"
     timeout = 3
 
 [urgency_normal]
@@ -110,10 +111,13 @@
     frame_color = "#ebe3b9"
     icon = "~/.config/dunst/icons/normal.svg"
     timeout = 5
+    foreground="#8791a3"
 
 [urgency_critical]
     background = "#1b1b23"
     frame_color = "#ebb9b9"
     icon = "~/.config/dunst/icons/critical.svg"
     timeout = 0
+    foreground="#8791a3"
+
 # vim: ft=conf

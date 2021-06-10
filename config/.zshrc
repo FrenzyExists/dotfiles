@@ -93,7 +93,6 @@ function _zsh_tmux_plugin_run() {
 }
 
 # Alias tmux to our wrapper function.
-alias tmux=_zsh_tmux_plugin_run
 
 # Autostart if not already in tmux and enabled.
 if [[ -z "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" && -z "$INSIDE_EMACS" && -z "$EMACS" && -z "$VIM" ]]; then

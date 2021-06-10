@@ -3,11 +3,19 @@
 
 # --| Open Web Browser |-- #
 super + w
-    quebrowser
+    qutebrowser
 
 # --| Open Terminal Emulator |-- #
 super + Return
     alacritty
+
+# --| Another Terminal |-- #
+super + shift + Return
+    kitty
+
+# --| Open Book Reader |-- #
+super + z
+    zathura
 
 # --| Emoji Menu |-- #
 super + e
@@ -36,6 +44,10 @@ super + a ; {m,s,l,p, i}
 # --| Unhide nodes |-- #
 super + a ; alt + i
    bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off -f --follow
+
+# --| Menu |-- #
+super + d
+    rofi -show drun
 
 # --| Clear workspace |-- #
 super + shift + s
@@ -166,7 +178,7 @@ XF86AudioMute
 XF86AudioRaiseVolume
     sh ~/.scripts/notification/volume_pam.sh up
 XF86AudioLowerVolume
-   sh ~/.scripts/notification/volume_pam.sh down
+    sh ~/.scripts/notification/volume_pam.sh down
 
 # --| Brightness Control |-- #
 XF86MonBrightnessUp

@@ -92,20 +92,20 @@ tabspaces: 4
 
 font:
         normal:
-                family: Victor Mono Nerd Font Complete Mono
-                style:  Medium
+                family: Victor Mono
+                style: Regular 
         italic:
-                family: Victor Mono Nerd Font Complete Mono
+                family: Victor Mono
                 style: Italic
         bold:
-                family: Victor Mono Nerd Font Complete Mono
+                family: Victor Mono
                 style: Bold Italic
         
-        size: 14
+        size: 15
         history: 10000
         offset:
                 x: 0
-                y: 1
+                y: 0
         glyph_offset:
                 x: 0
                 y: 2

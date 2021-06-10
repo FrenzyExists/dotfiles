@@ -11,7 +11,7 @@ xsetroot -cursor_name left_ptr
 sxhkd &
 
 # wallpaper
-feh --bg-tile ~/Pictures/wallpapers/Monochrome/mono-x.png
+feh --bg-tile ~/Pictures/wallpapers/Monochrome/pikaWall_III.png
 
 # Viva el spanish!!!
 setxkbmap -layout us -variant altgr-intl
