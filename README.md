@@ -12,7 +12,7 @@
 <p>
 
 <p align="center">
-  <img src="screenshots/screenshot_1.png">
+  <img src="screenshots/screenshot_2.png">
 </p>
 
 Please steal me, DO IT!!!!
