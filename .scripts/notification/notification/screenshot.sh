@@ -92,9 +92,11 @@ done
 send_notification() {
     if >/dev/null 2>&1 command -v notify-send ; then
         if [[ "${store}" == "save" ]] ; then
-            dunstify -i ~/.config/dunst/icons/screenshot.svg 'Screenshot saved!'
+            #dunstify -i ~/.config/dunst/icons/screenshot.svg 'Screenshot saved!'
+            dunstify -h string:fgcolor:#2c2e3e '      ' -i ~/.config/dunst/icons/screenshot.svg   "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Scr</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>eens</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>hot</b></span> \n<span foreground='#cddbf9' font_desc='Cartograph CF 13'><b>Screenshot saved!</b></span>"
         elif [[ "${store}" == "clip" ]] ; then
-            dunstify -i ~/.config/dunst/icons/clipboard.svg 'Screenshot passed to clipboard!'
+            #dunstify -h string:fgcolor:#2c2e3e '      ' -i ~/.config/dunst/icons/clipboard.svg 'Screenshot passed to clipboard!'
+            dunstify -h string:fgcolor:#2c2e3e '      ' -i ~/.config/dunst/icons/clipboard.svg   "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Scr</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>eens</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>hot</b></span> \n<span foreground='#cddbf9' font_desc='Cartograph CF 13'><b>Passed to clipboard!</b></span>"
         fi
     fi
 }
@@ -103,15 +105,15 @@ send_notification() {
 take_screenshot() {
     if [[ "${store}" == "save" ]] ; then
         if [[ "${mode}" == "select" ]] ; then
-            maim --select  "${path_to_save}$(date +%s.)png" 
+            maim --hidecursor --select  "${path_to_save}$(date +%s.)png" 
         elif [[ "${mode}" == "full" ]] ; then
-            maim "${path_to_save}$(date +%s).png"
+            maim --hidecursor "${path_to_save}$(date +%s).png"
         fi
     elif [[ "${store}" == "clip" ]] ; then
         if [[ "${mode}" == "select" ]] ; then
-            maim --select | xclip -selection clipboard -t image/png
+            maim --hidecursor --select | xclip -selection clipboard -t image/png
         elif [[ "${mode}" == "full" ]] ; then
-            maim | xclip -selection clipboard -t image/png
+            maim --hidecursor | xclip -selection clipboard -t image/png
         fi
     fi
     send_notification

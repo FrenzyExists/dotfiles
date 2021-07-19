@@ -1,0 +1,171 @@
+/* * * * * * * 
+ * AQUARIUM  *
+ * * * * * * */
+
+configuration {
+    lines:							6;
+    font: 							"Cartograph CF Italic 10";
+    bw: 							0;
+    location: 						0;
+    padding: 						0;
+    show-icons: 					false;
+    drun-display-format:            "{name}";
+    sidebar-mode: 					false;
+    separator-style: 				"none";
+    hide-scrollbar: 				true;
+    fullscreen: 					false;
+    fake-transparency: 				false;
+    scroll-method: 					0;
+    window-format: 					"[{w}] ··· {c} ···   {t}";
+    click-to-exit: 					true;
+    show-match: 					false;
+    combi-hide-mode-prefix: 		false;
+    display-drun: 					"♥";
+}
+
+* {
+    bg:		    #1b1b23
+;
+    fg:		    #8791a3;
+    black:      #2c2e3e;
+    black-2: 	#444F65;
+    red:        #ebb9b9;
+    green:      #caf6bb;
+    yellow:     #ebe3b9;
+    blue:       #cddbf9;
+    magenta:    #f6bbe7;
+    cyan:       #b8dceb;   
+}
+
+* {
+    background-color:             	@bg;
+}
+
+window {
+    border: 				10px;
+    border-color:			@bg;
+    padding: 				15;
+    width:                  20%;
+    height:                 45%;
+    border-radius: 			0;
+}
+
+prompt {
+    enabled: 						true;
+	padding: 						0% 0.2% 0.5% 0%;
+	background-color: 				@bg;
+	text-color: 					@fg;
+	font:							"UbuntuMono Nerd Font 20";
+}
+
+textbox-prompt-colon {
+    expand: 						false;
+    str: 							" ";
+    margin:						0px 4px 0px 0px;
+    text-color: 					inherit;
+}
+
+entry {
+    sp2cing:    					0;
+    background-color:               @bg;
+    text-color:                     @fg;
+    placeholder-color:              @fg;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Search Apps";
+    padding:                        0.15% 0% 0% 0%;
+    blink:                          true;
+}
+
+case-indicator {
+    spacing:    					0;
+    text-color: 					@fg;
+}
+
+inputbar {
+    children: 						[ prompt,textbox-prompt-colon,entry,case-indicator ];
+    background-color:               @bg;
+    text-color:                     @bg;
+    expand:                         false;
+    margin:                         -1.5% 0.5% -1% 0.5%;
+    padding:                        1%;
+    position:                       center;
+}
+
+mainbox {
+    background-color:               @bg;
+	border:							2px 2px 2px 2px;
+    border-radius:                  0% 0% 0% 0%;
+	border-color:					@fg;
+    children:                       [ inputbar, listview];
+    spacing:                       	2%;
+    padding:                        4% 2% 2% 2%;
+}
+
+listview {
+    columns:                        1;
+    fixed-height: 					0;
+    border: 						0px;
+    border-color: 					@red;
+    spacing: 						4px;
+    scrollbar: 						false;
+    padding: 						5px 5px 0px 5px;
+}
+
+
+element normal.active {
+    background-color: 				@green;
+    text-color:       				@bg;
+}
+
+element selected.normal {
+    background-color: 				@fg;
+    text-color:       				@bg;
+}
+
+element {
+    background-color:               @bg;
+    text-color:                     @fg;
+    orientation:                    vertical;
+    border-radius:                  0%;
+    padding:                        0.5% 0% 0.5% 0%;
+}
+
+element-text {
+    expand:                         false;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         0.5% 1% 0% 1%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    border-radius:                  1%;
+    background-color: 				@bg;
+    text-color:       				@red;
+
+}
+
+element selected {
+    background-color:               @selected;
+    text-color:                     @fg;
+	border:							0% 0% 0.3% 0%;
+    border-radius:                  8px;
+    border-color:                  	@black-2;
+}
+
+sidebar {
+    border:       					0px;
+    border-color: 					@red;
+    border-radius: 					0px;
+}
+
+message {
+    border: 						4px;
+    border-color: 					@red;
+    padding: 						1px;
+}
+
+textbox {
+    text-color: 					@fg;
+}

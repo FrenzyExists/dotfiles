@@ -13,9 +13,9 @@
     # The geometry of the window:
     # [{width}]x{height}[+/-{x}+/-{y}]
     # The geometry of the message window.
-    geometry = "272x3-34+34"
+    geometry = "342x3-34+34"
 
-    indicate_hidden = yes
+    indicate_hidden = false
 
 	# Show how many messages are currently hidden (because of geometry).
     shrink = false
@@ -48,7 +48,7 @@
     idle_threshold = 120
 
     # Text 
-    font = Victor Mono SemiBold Italic  13
+    font = Cartograph CF 13
     line_height = 1
 
     markup = full
@@ -64,8 +64,9 @@
     #   %%  Literal %
     # Markup is allowed
     format = "%s\n%b"
+    #format = "<span size="x-large"><b> %s</b></span>\n%b"
     alignment = center
-    show_age_threshold = 60
+    show_age_threshold = -1
     word_wrap = true
     ellipsize = middle
     ignore_newline = false
@@ -108,8 +109,7 @@
 
 [urgency_normal]
     background = "#1b1b23"
-    frame_color = "#ebe3b9"
-    icon = "~/.config/dunst/icons/normal.svg"
+    frame_color = "#2c2e3e"
     timeout = 5
     foreground="#8791a3"
 
@@ -119,5 +119,6 @@
     icon = "~/.config/dunst/icons/critical.svg"
     timeout = 0
     foreground="#8791a3"
+
 
 # vim: ft=conf

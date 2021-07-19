@@ -1,6 +1,5 @@
 #!usr/bin/sh
 
-
 welcome() {
 printf "%s" "\
 
@@ -56,6 +55,8 @@ function bar_thingy {
     half=""
     empty=""
 
+    red="\033[0;31m"
+
     volume=$(get_volume)
 
     total_half_hearts=$(( $(echo ${volume} / 10 | cut -f1 -d ".") ))
@@ -64,7 +65,7 @@ function bar_thingy {
     full_hearts=$(( ( ${total_half_hearts} - $(( ${total_half_hearts} % 2 )) ) / 2))
     empty_hearts=$(( 5 - ( ${full_hearts} + half_hearts ) ))
 
-    local bar=$(echo $(echo $(seq -s "" $((${full_hearts}+1)) )$(seq -s "" $((${half_hearts}+1)) )$(seq -s "" $(($empty_hearts + 1)) ) ) | sed 's/[0-9]//g')
+    local bar=$(echo $(echo $(seq -s " " $((${full_hearts}+1)) )$(seq -s " " $((${half_hearts}+1)) )$(seq -s " " $(($empty_hearts + 1)) ) ) | sed 's/[0-9]//g') 
     echo $bar
 }
 
@@ -91,7 +92,9 @@ function dunsty_boi {
         fi
     fi
     # Send notification thing
-    dunstify -i $icon_name -r ${ID} -a ${APPNAME} $(bar_thingy)
+    #dunstify -i $icon_name -r ${ID} -a ${APPNAME} -h string:fgcolor:#ebe3ba -h string:frcolor:#ebe3ba $(bar_thingy) 
+    #dunstify -h string:fgcolor:#2c2e3e '      ' -i $icon_name -r ${ID} -a ${APPNAME} "<span foreground='#caf6bb' font_desc='UbuntuMono Nerd Font 22'><b>Volume</b></span>\n<span foreground='#ebb9b9' font_desc='Source Code Pro 23'><b>$(bar_thingy)</b></span>"
+    dunstify  -i $icon_name -r $ID -a $APPNAME -h string:fgcolor:#2c2e3e '      ' "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Vo</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>lu</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>me</b></span>\n<span foreground='#cddbf9' font_desc='Source Code Pro 23'><b>$(bar_thingy)</b></span>"
 }
 
 
@@ -102,12 +105,18 @@ if [[ $# -gt 0 ]] ; then
             welcome
             ;;
         up)
-            pamixer -i 10
-            dunsty_boi
+            volume=$(get_volume)
+            if [[ $volume != "muted" ]] ; then
+                pamixer -i 10
+                dunsty_boi
+            fi
             ;;
         down)
-            pamixer -d 10
-            dunsty_boi
+            volume=$(get_volume)
+            if [[ $volume != "muted" ]] ; then
+                pamixer -d 10
+                dunsty_boi
+            fi
             ;;
         toggle)
             pamixer -t
@@ -115,7 +124,8 @@ if [[ $# -gt 0 ]] ; then
             echo $volume
             if [[ "$volume" == "muted" ]] ; then
                 icon_name="~/.config/dunst/icons/skull.svg"
-                dunstify -i "$icon_name" -r $ID -a $APPNAME "U  D E D"
+                #dunstify -i "$icon_name" -r $ID -a $APPNAME -h string:fgcolor:#ebb9ba -h string:frcolor:#ebb9ba "U  D E D"
+                dunstify  -i $icon_name -r $ID -a $APPNAME -h string:fgcolor:#2c2e3e '      ' "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Vo</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>lu</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>me</b></span>\n<span foreground='#cddbf9' font_desc='Source Code Pro 23'><b> U  D E D</b></span>"
             else
                 dunsty_boi
             fi

@@ -9,9 +9,9 @@ local colors = {
     fg = "#abb2bf",
     green = "#8fc587",
     red = "#ebb9b9",
-    lightbg = "#24242e",
-    lightbg2 = "#2d2d38",
-    blue = "#86bfbc",
+    lightbg = "#2c2e3e",
+    lightbg2 = "#3b3b4d",
+    blue = "#cddbf9",
     yellow = "#ffcf85",
     grey = "#8791a3",
     magenta = "#bf83b5"
@@ -133,7 +133,7 @@ gls.left[10] = {
 gls.right[1] = {
     GitIcon = {
         provider = function()
-            return " "
+            return "   "
         end,
         condition = require("galaxyline.provider_vcs").check_git_workspace,
         highlight = {colors.grey, colors.lightbg},
@@ -150,51 +150,59 @@ gls.right[2] = {
     }
 }
 
+gls.right[3] = {
+    viMode_icon = {
+        provider = function()
+            return "  "
+        end,
+        highlight = {colors.bg, colors.red},
+        separator = " ",
+        separator_highlight = {colors.red, colors.lightbg}
+    }
+}
+
 gls.right[4] = {
   ViMode = {
     provider = function()
-      local alias = {n = 'Normal ',i = 'Insert ',c= 'Command ',v= 'Visual ',V= 'Visual Line ', [''] = 'Visual Block '}
+      local alias = {n = '  Normal ',i = '  Insert ',c= '  Command ',v= '  Visual ',V= '  Visual Line ', [''] = '  Visual Block '}
       return alias[vim.fn.mode()]
     end,
     separator_highlight = {colors.blue,function()
       if not buffer_not_empty() then
         return colors.blue
       end
-      return colors.magenta
+      return colors.yellow
     end},
-    highlight = {colors.bg, colors.magenta, 'italicbold'},
+    highlight = {colors.red, colors.lightbg, 'italicbold'},
   },
 }
 
-gls.right[3] = {
-    viMode_icon = {
-        provider = function()
-            return "  "
-        end,
-        highlight = {colors.bg, colors.magenta},
-        separator = " ",
-        separator_highlight = {colors.magenta, colors.lightbg}
-    }
-}
-
-
 gls.right[5] = {
-    time = {
+    time_begin = {
         provider = function()
-            return " " .. os.date("%H:%M") .. " "
+            return " "
         end,
         separator = "",
-        separator_highlight = {colors.green, colors.magenta},
-        highlight = {colors.lightbg, colors.green, 'italicbold'}
+        separator_highlight = {colors.yellow, colors.lightbg},
+        highlight = {colors.lightbg, colors.yellow}
     }
 }
 
 gls.right[6] = {
+    time = {
+        provider = function()
+            return "  " .. os.date("%H:%M") .. "  "
+        end,
+    highlight = {colors.yellow, colors.lightbg, 'italicbold'}
+    }
+}
+
+gls.right[7] = {
     time_end = {
         provider= function()
             return ""
         end,
         separator = "  ",
-        separator_highlight = {colors.green, colors.bg}
+        separator_highlight = {colors.lightbg, colors.bg}
     }
 }

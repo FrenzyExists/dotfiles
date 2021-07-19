@@ -3,18 +3,20 @@
 # Frenzy's
 # BSPWM
 
-
 # set root pointer
 xsetroot -cursor_name left_ptr
+
+# Wallpaper
+feh --bg-fill ~/Pictures/gen_1_starters_full.png
 
 # key bindings
 sxhkd &
 
-# wallpaper
-feh --bg-tile ~/Pictures/wallpapers/Monochrome/pikaWall_III.png
-
 # Viva el spanish!!!
 setxkbmap -layout us -variant altgr-intl
+
+# Fuck CapsLock, all my homies hate CapsLock
+setxkbmap -option caps:swapescape
 
 # panel
 zsh ~/.config/polybar/launch.sh
@@ -28,6 +30,8 @@ bspc monitor -d I II III IV V VI
 
 # Set Xrandr or something
 xset r rate 250 40
+
+bspc rule -a Alacritty rectangle=780x460+0+0 center=true
 
 # Gap n border
 bspc config window_gap 16

@@ -208,10 +208,10 @@ alias stlen="sudo systemctl enable --now"
 alias stldis="sudo systemctl disable"
 
 # Configs
-alias config="nvim ~/.config/zshrc"
+alias config="nvim ~/.zshrc"
 alias config-bspwm="nvim ~/.config/bspwm/bspwmrc"
 alias config-sxhkd="nvim ~/.config/sxhkd/sxhkdrc"
-alias config-nvim="nvim ~/nvim/init.vim"
+alias config-nvim="nvim ~/.config/nvim/init.vim"
 alias config-zathura="nvim ~/.config/zathura/zathurarc"
 alias config-dunst="nvim ~/.config/dunst/dunstrc"
 alias config-alacritty="nvim ~/.config/alacritty/alacritty.yml"
@@ -478,3 +478,5 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+alias luamake=/home/frenzy/lua-language-server/3rd/luamake/luamake

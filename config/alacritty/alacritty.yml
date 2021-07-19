@@ -13,12 +13,14 @@ colors:
     dim_foreground:    '#4c5664'
 
   cursor:
+    style: Underline
     text:   CellBackground
-    cursor: CellForeground
+    cursor: '#ebe3b9'
+
 
   vi_mode_cursor:
     text:   CellBackground
-    cursor: CellForeground
+    cursor: '#ebe3b9'
 
   search:
     matches:
@@ -52,14 +54,15 @@ colors:
     white:   '#c8cedc'
 
   normal:
-    black:   *aquarium_bg
-    red:     '#d95e59'
-    green:   '#8fc587'
-    yellow:  '#ffcf85'
-    blue:    '#4a83c3'
-    magenta: '#bf83b5'
-    cyan:    '#4eb3cd'
-    white:   '#abb2c2'
+    black:   '#3b3b4d'
+    red:     '#ebb9b9'
+    green:   '#caf6bb'
+    yellow:  '#ebe3b9'
+    blue:    '#cddbf9'
+    magenta: '#f6bbe7'
+    cyan:    '#b8dceb'
+    white:   '#c8cedc'  
+
   dim:
     black:   '#32302f'
     red:     '#cc9b9d'
@@ -82,7 +85,7 @@ scrolling:
 window:
         dimensions:
                 columns: 100
-                lines: 85
+                lines: 100
 
         padding:
                 x: 10
@@ -92,23 +95,23 @@ tabspaces: 4
 
 font:
         normal:
-                family: Victor Mono
-                style: Regular 
+                family: Sauce Code Pro Nerd Font
+                style: Regular
         italic:
-                family: Victor Mono
+                family: Sauce Code Pro Nerd Font
                 style: Italic
         bold:
-                family: Victor Mono
+                family: Source Code Pro
                 style: Bold Italic
         
         size: 15
         history: 10000
         offset:
-                x: 0
-                y: 0
+                x: -1
+                y: 1
         glyph_offset:
                 x: 0
-                y: 2
+                y: 0
 
 env:
         WINIT_X11_SCALE_FACTOR: '1.0'
@@ -119,14 +122,15 @@ key_bindings:
         - { key: C,        mods: Control,       action: Copy                    }
         - { key: Paste,                         action: Paste                   }
         - { key: Copy,                          action: Copy                    }
-        - { key: Q,        mods: Alt,       action: Quit                    }
-        - { key: N,        mods: Alt,       action: SpawnNewInstance        }
+        - { key: Q,        mods: Alt,       action: Quit                        }
+        - { key: N,        mods: Alt,       action: SpawnNewInstance            }
         - { key: Return,   mods: Control,       action: ToggleFullscreen        }
         - { key: Equals,   mods: Control,       action: IncreaseFontSize        }
-        - { key: Minus, mods: Control,          action: DecreaseFontSize}
+        - { key: Minus, mods: Control,          action: DecreaseFontSize        }
+        - { key: S,        mods: Control|Shift, chars: "\x1b[83;5u"             }
 
 cursor:
-        style: Underline
+        style: underline
 
 mouse:
         double_click: { threshold: 300 }

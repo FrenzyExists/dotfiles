@@ -58,8 +58,17 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 " The status bar thingy
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
+" Colorizer for hex
+Plug 'norcalli/nvim-colorizer.lua'
+
 " Icons for File Tree
 Plug 'kyazdani42/nvim-web-devicons'
+
+" Errors
+Plug 'folke/trouble.nvim'
+
+" Automatic lspinstall
+Plug 'kabouzeid/nvim-lspinstall'
 
 " File Tree
 Plug 'kyazdani42/nvim-tree.lua'
@@ -67,20 +76,17 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Tab thingy
 Plug 'akinsho/nvim-bufferline.lua'
 
-" Whatever is this
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
 " Multiple Cursors
 "Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-" Cpp Support
-Plug 'bfrg/vim-cpp-modern'
+" Toggle Comments or something
+Plug 'terrortylor/nvim-comment'
 
 " Fancy startup screen
 Plug 'glepnir/dashboard-nvim'
 
 " Java autocompletion
-Plug 'artur-shaik/vim-javacomplete2'
+"Plug 'artur-shaik/vim-javacomplete2'
 
 " My own colorscheme
 Plug 'frenzyexists/aquarium-vim'
@@ -90,9 +96,6 @@ Plug 'tpope/vim-surround'
 
 " Icons
 Plug 'ryanoasis/vim-devicons'
-
-" Snippets and text editing support
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " Color highlighter
 Plug 'norcalli/nvim-colorizer.lua'
@@ -117,7 +120,6 @@ Plug 'plasticboy/vim-markdown'
 
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
 "Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-
 "Plug 'neoclide/coc-snippets'
 
 " Controlling Git
@@ -126,21 +128,23 @@ Plug 'tpope/vim-fugitive'
 " All the lua functions you write twice.
 Plug 'nvim-lua/plenary.nvim'
 
-" Remaps the Caps-Lock key for escape on nvim
-Plug 'tpope/vim-capslock'
-
 " Search Thingy
 Plug 'liuchengxu/vim-clap'
 
 " Autoclose
 Plug 'townk/vim-autoclose'
 
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'hrsh7th/nvim-compe'
+
 call plug#end()
 
 " ---| Configuring everything |---
 
 " Spell Check
-set spell
+" set spell "NOPE
 
 " Go Aquarium go!
 colorscheme aquarium
@@ -171,19 +175,53 @@ set expandtab
 set shiftround
 set smartindent
 
+" No Search Highlight when unneded
+set nohlsearch
+set noerrorbells
+
+
+
+" Gui Cursor!
+:set guicursor=n-v-c:underline,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+" Abandon buffer when unloaded
+set hidden
+
+" Who needs gui background when your terminal has the same theme?
+highlight Normal guibg=none
+
+" No Backup!
+set nobackup
 " Rebind for tab movement
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
+nnoremap <C-w> :tabprevious<CR>
+nnoremap <C-e> :tabnext<CR>
+nnoremap <C-n> :tabnew<CR>
+nnoremap <c-m> :tabclose<CR>
+
+" Save
+nnoremap <C-s> :w<CR>
+map <C-S-s> :wq<CR>
+
+" In case you have probs, look this:
+" https://www.reddit.com/r/neovim/comments/mbj8m5/how_to_setup_ctrlshiftkey_mappings_in_neovim_and/
 
 " Split faster (fast as fuc boi)
 nnoremap <leader>\ :vs<CR>
 nnoremap <leader>- :sp<CR>
 
 " Move between each split Faster
-map <C-k> <C-w>k
-map <C-j> <C-w>j
-map <C-l> <C-w>l
-map <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
+" More natural window resize 
+map <A-k> :resize+5<CR>
+map <A-j> :resize-5<CR>
+map <A-h> :vertical resize-5<CR>
+map <A-l> :vertical resize+5<CR>
 
 " More natural slit opening
 set splitbelow
@@ -200,15 +238,14 @@ nnoremap <c-b> :vnew term://zsh<CR>
 " Highlight matching pairs of brackets. Use the '%' character to jump between them.
 set matchpairs+=<:>
 
+set mouse=a
+
 " Remap for next snippet
 "let g:coc_snippet_next = '<tab>'
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
 
 augroup COMPILER
     autocmd!
@@ -360,32 +397,32 @@ require "nvim-web-devicons".setup {
         },
         js = {
             icon = "",
-            color = "#EBCB8B",
+            color = "#ffcf85",
             name = "js"
         },
         ts = {
-            icon = "ﯤ",
-            color = "#519ABA",
+            icon = "",
+            color = "#ffcf85",
             name = "ts"
         },
         kt = {
             icon = "󱈙",
-            color = "#ffcb91",
+            color = "#b8dceb",
             name = "kt"
         },
         png = {
-            icon = " ",
-            color = "#BD77DC",
+            icon = "",
+            color = "#ebb9b9",
             name = "png"
         },
         jpg = {
-            icon = " ",
-            color = "#BD77DC",
+            icon = "",
+            color = "#ebb9b9",
             name = "jpg"
         },
         jpeg = {
-            icon = " ",
-            color = "#BD77DC",
+            icon = "",
+            color = "#ebb9b9",
             name = "jpeg"
         },
         mp3 = {
@@ -394,7 +431,7 @@ require "nvim-web-devicons".setup {
             name = "mp3"
         },
         mp4 = {
-            icon = "",
+            icon = "",
             color = "#C8CCD4",
             name = "mp4"
         },
@@ -409,50 +446,70 @@ require "nvim-web-devicons".setup {
             name = "Dockerfile"
         },
         rb = {
-            icon = "",
-            color = "#ff75a0",
+            icon = "",
+            color = "#ebb9b9",
             name = "rb"
         },
         vue = {
             icon = "﵂",
-            color = "#7eca9c",
+            color = "#8fc587",
             name = "vue"
         },
         py = {
             icon = "",
-            color = "#a7c5eb",
+            color = "#cddbf9",
             name = "py"
         },
         toml = {
             icon = "",
-            color = "#61afef",
+            color = "#3b3b4d",
             name = "toml"
         },
         lock = {
             icon = "",
-            color = "#DE6B74",
+            color = "#ebb9b9",
             name = "lock"
         },
         zip = {
-            icon = "",
-            color = "#EBCB8B",
+            icon = "遲",
+            color = "#ffcf85",
             name = "zip"
         },
         xz = {
-            icon = "",
-            color = "#EBCB8B",
+            icon = "遲",
+            color = "#ffcf85",
             name = "xz"
         },
         deb = {
             icon = "",
-            color = "#a3b8ef",
+            color = "#076678",
             name = "deb"
         },
         rpm = {
             icon = "",
             color = "#fca2aa",
             name = "rpm"
-        }
+        },
+        vim = {
+            icon = "",
+            color = "#8fc587",
+            name = "vim"
+            },
+        md = {
+            icon = "",
+            color = "#cddbf9",
+            name = "md"
+            },
+        lua = {
+            icon = "",
+            color = "#076678",
+            name = "lua"
+            },
+        pdf = {
+            icon = "",
+            color = "#d95e59",
+            name = "pdf"
+            }
     }
 }
 EOF
@@ -460,11 +517,158 @@ EOF
 " Source Lua bar
 luafile ~/.config/nvim/lua/cfg/aquariumline.lua
 
-"lua require("bufferline").setup{}
-
 " Source Lua tab bar
 luafile ~/.config/nvim/lua/cfg/aquariumbufferline.lua
 
+" LSP Lua
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys 
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    require'completion'.on_attach(client)
+
+    --Enable completion triggered by <c-x><c-o>
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+end
+
+-- RUST STUFF
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "pyright", "rust_analyzer", "tsserver" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+
+require'lspconfig'.rust_analyzer.setup{}
+
+
+-- Colorizer
+require'colorizer'.setup()
+
+vim.o.completeopt = "menuone,noselect"
+
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+  };
+}
+
+-- ERROR Thing
+require("trouble").setup {}
+
+-- lspinstall
+require'lspinstall'.setup() -- important
+
+require'lspconfig'.beancount.setup{}
+
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+
+-- Dashboard
+
+
+local g = vim.g
+
+g.dashboard_custom_header = {
+            ' ', 
+            '⠸⣷⣦⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⠀⠀⠀ ',
+            '⠀⠙⣿⡄⠈⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠔⠊⠉⣿⡿⠁⠀⠀⠀ ',
+            '⠀⠀⠈⠣⡀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⠀⣰⠟⠀⠀⠀⣀⣀ ',
+            '⠀⠀⠀⠀⠈⠢⣄⠀⡈⠒⠊⠉⠁⠀⠈⠉⠑⠚⠀⠀⣀⠔⢊⣠⠤⠒⠊⠉⠀⡜ ',
+            '⠀⠀⠀⠀⠀⠀⠀⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠩⡔⠊⠁⠀⠀⠀⠀⠀⠀⠇ ',
+            '⠀⠀⠀⠀⠀⠀⠀⡇⢠⡤⢄⠀⠀⠀⠀⠀⡠⢤⣄⠀⡇⠀⠀⠀⠀⠀⠀⠀⢰⠀ ',
+            '⠀⠀⠀⠀⠀⠀⢀⠇⠹⠿⠟⠀⠀⠤⠀⠀⠻⠿⠟⠀⣇⠀⠀⡀⠠⠄⠒⠊⠁⠀ ',
+            '⠀⠀⠀⠀⠀⠀⢸⣿⣿⡆⠀⠰⠤⠖⠦⠴⠀⢀⣶⣿⣿⠀⠙⢄⠀⠀⠀⠀⠀⠀ ',
+            '⠀⠀⠀⠀⠀⠀⠀⢻⣿⠃⠀⠀⠀⠀⠀⠀⠀⠈⠿⡿⠛⢄⠀⠀⠱⣄⠀⠀⠀⠀ ',
+            '⠀⠀⠀⠀⠀⠀⠀⢸⠈⠓⠦⠀⣀⣀⣀⠀⡠⠴⠊⠹⡞⣁⠤⠒⠉⠀⠀⠀⠀⠀ ',
+            '⠀⠀⠀⠀⠀⠀⣠⠃⠀⠀⠀⠀⡌⠉⠉⡤⠀⠀⠀⠀⢻⠿⠆⠀⠀⠀⠀⠀⠀⠀ ',
+            '⠀⠀⠀⠀⠀⠰⠁⡀⠀⠀⠀⠀⢸⠀⢰⠃⠀⠀⠀⢠⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀ ',
+            '⠀⠀⠀⢶⣗⠧⡀⢳⠀⠀⠀⠀⢸⣀⣸⠀⠀⠀⢀⡜⠀⣸⢤⣶⠀⠀⠀⠀⠀⠀ ',
+            '⠀⠀⠀⠈⠻⣿⣦⣈⣧⡀⠀⠀⢸⣿⣿⠀⠀⢀⣼⡀⣨⣿⡿⠁⠀⠀⠀⠀⠀⠀ ',
+            '⠀⠀⠀⠀⠀⠈⠻⠿⠿⠓⠄⠤⠘⠉⠙⠤⢀⠾⠿⣿⠟⠋         '
+}
+
+--g.dashboard_custom_section = {
+--    a = {description = {"  Find File                 SPC f f"}, command = "Telescope find_files"},
+--    b = {description = {"  Recents                   SPC f o"}, command = "Telescope oldfiles"},
+--    d = {description = {"洛 New File                  SPC f n"}, command = "DashboardNewFile"},
+--    f = {description = {"  Load Last Session         SPC s l"}, command = "SessionLoad"}
+--}
+
+
+
+g.dashboard_custom_footer = {
+    "PikaVim v0.1"
+}
+
+vim.api.nvim_exec(
+    [[
+   au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
+]],
+    false
+)
+
+local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+
+local function opt(scope, key, value)
+    scopes[scope][key] = value
+    if scope ~= "o" then
+        scopes["o"][key] = value
+    end
+end
+
+opt("o", "ruler", false)
+
+
+EOF
 
 nnoremap <C-a> :NvimTreeToggle<CR>
 
@@ -490,26 +694,7 @@ let g:mkdp_preview_options = {
     \ 'disable_filename': 0
     \ }
 
-" --| Dashboard |--
 
-" Top
-let g:dashboard_custom_header = [
-            \' ', 
-            \ '⠸⣷⣦⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⠀⠀⠀ ',
-            \ '⠀⠙⣿⡄⠈⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠔⠊⠉⣿⡿⠁⠀⠀⠀ ',
-            \ '⠀⠀⠈⠣⡀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⠀⣰⠟⠀⠀⠀⣀⣀ ',
-            \ '⠀⠀⠀⠀⠈⠢⣄⠀⡈⠒⠊⠉⠁⠀⠈⠉⠑⠚⠀⠀⣀⠔⢊⣠⠤⠒⠊⠉⠀⡜ ',
-            \ '⠀⠀⠀⠀⠀⠀⠀⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠩⡔⠊⠁⠀⠀⠀⠀⠀⠀⠇ ',
-            \ '⠀⠀⠀⠀⠀⠀⠀⡇⢠⡤⢄⠀⠀⠀⠀⠀⡠⢤⣄⠀⡇⠀⠀⠀⠀⠀⠀⠀⢰⠀ ',
-            \ '⠀⠀⠀⠀⠀⠀⢀⠇⠹⠿⠟⠀⠀⠤⠀⠀⠻⠿⠟⠀⣇⠀⠀⡀⠠⠄⠒⠊⠁⠀ ',
-            \ '⠀⠀⠀⠀⠀⠀⢸⣿⣿⡆⠀⠰⠤⠖⠦⠴⠀⢀⣶⣿⣿⠀⠙⢄⠀⠀⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⠀⠀⠀⠀⢻⣿⠃⠀⠀⠀⠀⠀⠀⠀⠈⠿⡿⠛⢄⠀⠀⠱⣄⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⠀⠀⠀⠀⢸⠈⠓⠦⠀⣀⣀⣀⠀⡠⠴⠊⠹⡞⣁⠤⠒⠉⠀⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⠀⠀⠀⣠⠃⠀⠀⠀⠀⡌⠉⠉⡤⠀⠀⠀⠀⢻⠿⠆⠀⠀⠀⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⠀⠀⠰⠁⡀⠀⠀⠀⠀⢸⠀⢰⠃⠀⠀⠀⢠⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⢶⣗⠧⡀⢳⠀⠀⠀⠀⢸⣀⣸⠀⠀⠀⢀⡜⠀⣸⢤⣶⠀⠀⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⠈⠻⣿⣦⣈⣧⡀⠀⠀⢸⣿⣿⠀⠀⢀⣼⡀⣨⣿⡿⠁⠀⠀⠀⠀⠀⠀ ',
-            \ '⠀⠀⠀⠀⠀⠈⠻⠿⠿⠓⠄⠤⠘⠉⠙⠤⢀⠾⠿⣿⠟⠋         ',
-            \ ]
-
+" hi! StatusLineNC gui=underline guifg=#somecolor
+"
 

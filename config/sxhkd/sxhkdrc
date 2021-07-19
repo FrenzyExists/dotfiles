@@ -7,11 +7,10 @@ super + w
 
 # --| Open Terminal Emulator |-- #
 super + Return
-    alacritty
-
+    kitty 
 # --| Another Terminal |-- #
 super + shift + Return
-    kitty
+    alacritty
 
 # --| Open Book Reader |-- #
 super + z
@@ -22,8 +21,10 @@ super + e
     sh ~/.scripts/menu/emoji.sh
 
 # MPC boi
-super + m: {p,n,b}
-    mpc {play, next, back}
+super + n: {p,n,b,s}
+    mpc {play, next, prev, pause}
+
+
 
 # --| Open File Manager -- #
 super + shift + f
@@ -31,22 +32,25 @@ super + shift + f
 
 # --| Set Window state |-- #
 super + {d,shift + d,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	bspc node -t {\~tiled,\~pseudo_tiled,\~floating,\~fullscreen}
 
 # --| Change Window State (part II) |-- #
 super + @space
-     bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # --| Set Node flags |-- #
-super + a ; {m,s,l,p, i}
-    bspc node -g {marked,sticky,locked,private, hidden}
+#super + a ; {m,s,l,p, i}
+#    bspc node -g {marked,sticky,locked,private, hidden}
+
+super + ctrl + i
+    bspc node -g hidden
 
 # --| Unhide nodes |-- #
-super + a ; alt + i
+super + ctrl + a
    bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off -f --follow
 
 # --| Menu |-- #
-super + d
+super + m
     rofi -show drun
 
 # --| Clear workspace |-- #
@@ -57,13 +61,17 @@ super + shift + s
 super + shift + r
     pkill -USR1 -x sxhkd && sh ~/.scripts/notification/reload.sh
 
-# --| Open Eww |-- #
-# super + shift + w
-#    eww  
+# --| Music and Task viewer (eww) |-- #
+super + alt + n
+    {sh ~/.scripts/pane/eww_sidepanel.sh left on,sh ~/.scripts/pane/eww_sidepanel.sh left off}
 
 # --| Quit Menu (eww) |--
 super + x
-    rofi_run -l
+    {sh ~/.scripts/pane/eww_sidepanel.sh right on,sh ~/.scripts/pane/eww_sidepanel.sh right off}
+
+#--| Top Hub Menu (eww) |--#
+super + alt + m
+    {sh ~/.scripts/pane/eww_sidepanel.sh top on,sh ~/.scripts/pane/eww_sidepanel.sh top off}
 
 # --| Quit or Reload BSPWM |-- #
 super + alt + {q,r}
@@ -71,11 +79,11 @@ super + alt + {q,r}
 
 # --| Close and Kill |-- #
 super + q
-    bspc node -k
+    bspc node -c
 
 # --| Alternate between the tiled and monocle layout |-- #
 super + shift + m
-    bspc desktop -l next
+    {bspc desktop -l next && bspc config -m focused bottom_padding 84,bspc desktop -l next && bspc config -m focused bottom_padding 70}
 
 # if the current node is automatic, send it to the last manual, otherwise pull the last leaf
 super + y
@@ -108,11 +116,6 @@ super + shift + p
 # --| Set Auto |-- #
 super + ctrl + {a,s,d}
     bspc config automatic_scheme {longest_side,alternate,spiral}
-
-# set the node flags
-#super + ctrl + {x,y,z}
-#    bspc node -g {locked,sticky,private}
-
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -160,6 +163,10 @@ super + ctrl + space
 super + ctrl + shift + space
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
+# --| Polybar toggle |-- #
+super + alt + space
+    {sleep 0.3 && polybar-msg cmd hide && bspc config -m focused bottom_padding 5, sleep 0.3 && polybar-msg cmd show && bspc config -m focused bottom_padding 60}
+
 # --| Resize Window - Outward |-- #
 super + alt + {h,j,k,l}
     bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
@@ -170,7 +177,12 @@ super + alt + shift + {h,j,k,l}
 
 # --| Move a floating window |-- #
 super + {Left,Down,Up,Right}
-    bspc node -v {-24 0,0 24,0 -24,24 0}
+    sh ~/.scripts/pane/move_window.sh {left,down,up,right}
+    # bspc node -v {-24 0,0 24,0 -24,24 0}
+
+# --| Moving a floating window to the edge |-- #
+super + shift + {Left,Down,Up,Right}
+    sh ~/.scripts/pane/move_window.sh {edge-left,edge-down,edge-up,edge-right}
 
 # --| Volume Control |-- #
 XF86AudioMute
@@ -185,3 +197,15 @@ XF86MonBrightnessUp
     sh ~/.scripts/notification/brightness.sh up
 XF86MonBrightnessDown
     sh ~/.scripts/notification/brightness.sh down
+
+# --| Music Control (MPD ONLY) |-- #
+XF86AudioPrev
+    mpc prev
+
+XF86AudioNext
+    mpc next
+
+XF86AudioPlay
+    mpc toggle
+
+# # # # # # # # # # # # # # # # # # #

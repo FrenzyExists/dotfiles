@@ -1,0 +1,44 @@
+set default-bg                  "#1b1b23"
+set default-fg                  "#8791a3"
+
+set statusbar-bg                "#1b1b23"
+set statusbar-fg                "#8791a3"
+
+set inputbar-bg                 "#1b1b23"
+set inputbar-fg                 "#caf6bb"
+
+set notification-bg             "#1b1b23"
+set notification-fg             "#8791a3"
+
+set notification-error-bg       "#1b1b23"
+set notification-error-fg       "#8791a3"
+
+set notification-warning-bg     "#1b1b23"
+set notification-warning-fg     "#ebb9b9"
+
+set highlight-color             "#4c5664"
+set highlight-active-color      "#2c2e3e"
+
+set completion-bg               "#2c2e3e"
+set completion-fg               "#8791a3"
+
+set completion-highlight-fg     "#ebe3b9"
+set completion-highlight-bg     "#2c2e3e"
+
+set recolor-lightcolor          "#1b1b23"
+set recolor-darkcolor           "#8791a3"
+
+set recolor                     "true"
+set recolor-keephue             "true"
+
+set font "cascadiacode regular 14"
+
+map <C-r> reload
+map <C-j> zoom in
+map <C-k> zoom out
+
+
+unmap i
+map i toggle_statusbar
+
+

@@ -4,10 +4,14 @@ local bfs = bl.setup
 
 require "bufferline".setup {
     options = {
+        close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+        right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+        left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
+        middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
         offsets = {{filetype = "NvimTree", text = "Explorer"}},
-        buffer_close_icon = "",
-        modified_icon = "",
-        close_icon = " ",
+        buffer_close_icon = " ",
+        modified_icon = "●",
+        close_icon = " ",
         left_trunc_marker = "",
         right_trunc_marker = "",
         max_name_length = 14,
@@ -23,63 +27,74 @@ require "bufferline".setup {
     -- bar colors!!
     highlights = {
         fill = {
-            guifg = "#fdf6e3",
-            guibg = "#fdf6e3"
+            guifg = "#caf6bb",
+            guibg = "#2c2e3e"
         },
         background = {
-            guifg = bar_fg,
-            guibg = "#fdf6e3"
+            guifg = "#a0a8b6",
+            guibg = "#2c2e3e"
         },
         -- buffer
         buffer_selected = {
-            guifg = activeBuffer_fg,
-            guibg = "#eee8d5",
-            gui = "bold"
+            guifg = "#8791a3",
+            guibg = "#1b1b23",
+            gui = "italicbold"
         },
         buffer_visible = {
-            guifg = "#002b36",
-            guibg = "#fdf6e3"
+            guifg = "#ebe3b9",
+            guibg = "#1b1b23"
         },
         -- tabs over right
         tab = {
-            guifg = "#002b36",
-            guibg = "#fdf6e3"
+            guifg = "#ebe3b9",
+            guibg = "#1b1b23"
         },
         tab_selected = {
-            guifg = "#002b36",
-            guibg = "#fdf6e3"
+            guifg = "#caf6bb",
+            guibg = "#2c2e3e"
         },
         tab_close = {
-            guifg = "#002b36",
-            guibg = "#fdf6e3"
+            guifg = "#ebb9b9",
+            guibg = "#2c2e3e"
         },
         -- buffer separators
         separator = {
-            guifg = "#fdf6e3",
-            guibg = "#fdf6e3"
+            guifg = "#1b1b23",
+            guibg = "#1b1b23"
         },
         separator_selected = {
-            guifg = "#fdf6e3",
-            guibg = "#fdf6e3"
+            guifg = "#2c2e3e",
+            guibg = "#2c2e3e"
         },
         separator_visible = {
-            guifg = "#fdf6e3",
-            guibg = "#fdf6e3"
+            guifg = "#2c2e3e",
+            guibg = "#2c2e3e"
         },
         indicator_selected = {
-            guifg = "#fdf6e3",
-            guibg = "#fdf6e3"
+            guifg = "#2c2e3e",
+            guibg = "#cddbf9"
         },
         -- modified files (but not saved)
         modified_selected = {
-            guifg = "#A3BE8C",
-            guibg = "#fdf6e3"
+            guifg = "#3b3b4d",
+            guibg = "#1b1b23"
         },
         modified_visible = {
-            guifg = "#BF616A",
-            guibg = "#d8ccc4"
+            guifg = "#8791a3",
+            guibg = "#ebe3b9"
         }
     }
 }
+
+diagnostics_indicator = function(count, level, diagnostics_dict, context)
+  local s = " "
+  for e, n in pairs(diagnostics_dict) do
+    local sym = e == "error" and " "
+      or (e == "warning" and " " or "" )
+    s = s .. n .. sym
+  end
+  return s
+end
+
 
 
