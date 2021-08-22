@@ -12,7 +12,6 @@ picom -b &
 bspwm &
 
 # Fire Up Dunst
-
 dunst &
 
 # Mundane stuff

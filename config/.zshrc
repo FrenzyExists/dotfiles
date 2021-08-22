@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# zmodload zsh/zprof
+
 # Frenzy's
 # ███████ ███████ ██   ██      ██████  ██████  ███    ██ ███████ ██  ██████  
 #    ███  ██      ██   ██     ██      ██    ██ ████   ██ ██      ██ ██       
@@ -16,94 +18,11 @@ if [[ $- != *i* ]]; then
 	return
 fi
 
-if ! (( $+commands[tmux] )); then
-  print "tmux not found. Dude, install Tmux, its gud" >&2
-  return 1
-fi
+# Autocompletion
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-
-# --------------------------------------------------------------------------
-# TMUX auto initializer, stripped from OH-MY-ZSH (partially lol)
-# CONFIGURATION VARIABLES
-# Automatically start tmux
-: ${ZSH_TMUX_AUTOSTART:=false}
-# Only autostart once. If set to false, tmux will attempt to
-# autostart every time your zsh configs are reloaded.
-: ${ZSH_TMUX_AUTOSTART_ONCE:=true}
-# Automatically connect to a previous session if it exists
-: ${ZSH_TMUX_AUTOCONNECT:=true}
-# Automatically close the terminal when tmux exits
-: ${ZSH_TMUX_AUTOQUIT:=$ZSH_TMUX_AUTOSTART}
-# Set term to screen or screen-256color based on current terminal support
-: ${ZSH_TMUX_FIXTERM:=true}
-# The TERM to use for non-256 color terminals.
-# Tmux states this should be screen, but you may need to change it on
-# systems without the proper terminfo
-: ${ZSH_TMUX_FIXTERM_WITHOUT_256COLOR:=screen}
-# The TERM to use for 256 color terminals.
-# Tmux states this should be screen-256color, but you may need to change it on
-# systems without the proper terminfo
-: ${ZSH_TMUX_FIXTERM_WITH_256COLOR:=screen-256color}
-# Set the configuration path
-: ${ZSH_TMUX_CONFIG:=$HOME/.tmux.conf}
-# Set -u option to support unicode
-: ${ZSH_TMUX_UNICODE:=false}
-
-# Determine if the terminal supports 256 colors
-if [[ $terminfo[colors] == 256 ]]; then
-  export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITH_256COLOR
-else
-  export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR
-fi
-
-# Set the correct local config file to use.
-if [[ -e "$ZSH_TMUX_CONFIG" ]]; then
-  export ZSH_TMUX_CONFIG
-  export _ZSH_TMUX_FIXED_CONFIG="~/tmux.extra.conf"
-fi
-
-# Wrapper function for tmux.
-function _zsh_tmux_plugin_run() {
-  if [[ -n "$@" ]]; then
-    command tmux "$@"
-    return $?
-  fi
-
-  local -a tmux_cmd
-  tmux_cmd=(command tmux)
-  [[ "$ZSH_TMUX_ITERM2" == "true" ]] && tmux_cmd+=(-CC)
-  [[ "$ZSH_TMUX_UNICODE" == "true" ]] && tmux_cmd+=(-u)
-
-  # Try to connect to an existing session.
-  [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]] && $tmux_cmd attach
-
-  # If failed, just run tmux, fixing the TERM variable if requested.
-  if [[ $? -ne 0 ]]; then
-    if [[ "$ZSH_TMUX_FIXTERM" == "true" ]]; then
-      tmux_cmd+=(-f "$_ZSH_TMUX_FIXED_CONFIG")
-    elif [[ -e "$ZSH_TMUX_CONFIG" ]]; then
-      tmux_cmd+=(-f "$ZSH_TMUX_CONFIG")
-    fi
-    $tmux_cmd new-session
-  fi
-
-  if [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]]; then
-    exit
-  fi
-}
-
-# Alias tmux to our wrapper function.
-
-# Autostart if not already in tmux and enabled.
-if [[ -z "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" && -z "$INSIDE_EMACS" && -z "$EMACS" && -z "$VIM" ]]; then
-  # Actually don't autostart if we already did and multiple autostarts are disabled.
-  if [[ "$ZSH_TMUX_AUTOSTART_ONCE" == "false" || "$ZSH_TMUX_AUTOSTARTED" != "true" ]]; then
-    export ZSH_TMUX_AUTOSTARTED=true
-    _zsh_tmux_plugin_run
-  fi
-fi
-
-# --------------------------------------------------------------------------
+(( ! ${+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE} )) &&
+typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=green,bg=black"
 
 # ---| Increase key speed via rate change |--- #
 xset r rate 300 50
@@ -129,6 +48,7 @@ HISTFILE="$HOME/.cache/.zsh_history"
 
 # Goto some Place
 alias gotoDownloads='cd ~/Downloads/'
+alias gotoDesktop='cd ~/Desktop/'
 alias gotoDocuments='cd ~/Documents/'
 alias gotoPictures='cd ~/Pictures/'
 alias gotoWallpapers='cd ~/Pictures/wallpapers/'
@@ -136,7 +56,9 @@ alias gotoMusic='cd ~/Music/'
 
 # Pacman - https://wiki.archlinux.org/index.php/Pacman_Tips
 # But its full of Inspector Gadged references
-alias gogoPacmanInstall='sudo pacman -S'
+gogoPacmanInstall() {
+    sudo pacman -S "$@" ;
+}
 alias gogoPacmanUnninstall='sudo pacman -R'
 alias gogoPacmanInstallUpdate='sudo pacman -Syu'
 alias gogoPacmanUpgrade="sudo pacman -U"
@@ -152,12 +74,12 @@ alias gogoPacmanSearchQuery="pacman -Qs"
 
 
 # Tmux
-alias ta='tmux attach -t'
-alias tad='tmux attach -d -t'
-alias ts='tmux new-session -s'
-alias tl='tmux list-sessions'
-alias tksv='tmux kill-server'
-alias tkss='tmux kill-session -t'
+alias t-attach='tmux attach -t'
+alias t-attach-d='tmux attach -d -t'
+alias t-new='tmux new-session -s'
+alias t-list='tmux list-sessions'
+alias t-kill-s='tmux kill-server'
+alias t-kill-ss='tmux kill-session -t'
 
 # MPD
 alias mpd_start='systemctl start mpd.service mpdscribble.service --user'
@@ -218,6 +140,18 @@ alias config-alacritty="nvim ~/.config/alacritty/alacritty.yml"
 alias config-polybar-bars="nvim ~/.config/polybar/config"
 alias config-polybar-modules="nvim ~/.config/polybar/modules.ini"
 alias config-picom="nvim ~/.config/picom.conf"
+alias config-kitty="nvim ~/.config/kitty/kitty.conf"
+alias config-i3="nvim ~/.config/i3/config"
+alias config-ncmpcpp='nvim ~/.config/ncmpcpp/config'
+alias config-mpd="nvim ~/.config/mpd/mpd.conf"
+alias config-discocss="nvim ~/.config/discocss/custom.css"
+alias config-ranger="nvim ~/.config/ranger/"
+alias config-eww-scss="nvim ~/.config/eww/eww.scss"
+alias config-eww-main="nvim ~/.config/eww/eww.xml"
+alias config-eww-modules="nvim ~/.config/eww/modules/"
+
+# Dots
+alias copy-dots="sh ~/.scripts/menu/copy_dots.sh &"
 
 # Network
 alias net-h='https://linuxhint.com/arch_linux_network_manager/'
@@ -225,8 +159,6 @@ alias net-show='nmcli connection show'
 alias net-dev='nmcli device'
 alias net-up='nmcli connection up uuid'
 alias net-deco='nmcli device disconnect'
-
-
 
 # Update something
 alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
@@ -249,13 +181,28 @@ bindkey '^Z' ctrlz
 
 # ls with preferred arguments
 ls() {
-	command ls --color=yes -F1 "$@" | more --clean-print --lines 10
+	command ls --color=yes -F1 "$@" | more --clean-print --lines 12
+}
+
+eww() {
+    command $HOME/eww/target/release/eww "$@"
 }
 
 # cd and ls after
 cd() {
 	builtin cd "$@" && command ls --color=auto -F
 }
+
+# Show top 21 Commands used (thanks totoro
+toppy() {
+    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n 21
+}
+
+#_fix_cursor() {
+#   echo -ne '\e[4 q'
+#}
+
+#precmd_functions+=(_fix_cursor)
 
 # Recompile completion and Reload ZSH
 src() {
@@ -311,6 +258,7 @@ ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ⌥" 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ⌘"
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 # Some Rust Lang thing idk
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -438,7 +386,7 @@ zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description 'Introduce %d'
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{green}->%F{yellow} %d%f'
+zstyle ':completion:*' format ' %F{green}ﰲ%F{yellow} %d%f'
 zstyle ':completion:*:messages' format ' %F{green}->%F{purple} %d%f'
 zstyle ':completion:*:descriptions' format ' %F{green}->%F{yellow} %d%f'
 zstyle ':completion:*:warnings' format ' %F{green}->%F{red} no matches%f'
@@ -480,3 +428,16 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias luamake=/home/frenzy/lua-language-server/3rd/luamake/luamake
+
+
+ ####################################
+ #           COLOR PALLETE          #
+ ####################################
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+red="\e[1;31m"
+green="\e[1;32m"
+nrm="\e[0m"
+
+

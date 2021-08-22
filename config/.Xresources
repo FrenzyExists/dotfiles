@@ -1,9 +1,9 @@
 ! Base colors
 *.foreground:  #E1E1E1
-*.background:  #1c2023
-*.cursorColor: #778899
+*.background:  #1b1b23
+*.cursorColor:#b8dceb 
 
-*.color0:  #1c2023
+*.color0:  #1b1b23
 *.color1:  #bf616a
 *.color2:  #a3be8c
 *.color3:  #ebcb8b
@@ -33,6 +33,8 @@ rofi.color-urgent: argb:00000000, #f43753, argb:00000000, argb:00000000, #e29a49
 rofi.color-active: argb:00000000, #49bbfb, argb:00000000, argb:00000000, #e29a49
 rofi.kb-cancel: Escape,Alt+F1
 
+sxiv*.background:  #1b1b23
+
 ! xterm
 xterm*termName: xterm-256color
 xterm*font: monospace
@@ -42,6 +44,7 @@ xterm*vt100*geometry: 90x34
 xterm*saveLines: 2000
 xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*eightBitInput: false
+xterm*cursorColor: #b8dceb
 
 ! URxvt
 URxvt*saveline: 15000
