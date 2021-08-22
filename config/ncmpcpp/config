@@ -5,6 +5,9 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 lyrics_directory  = ~/.config/ncmpcpp/lyrics
 mpd_music_dir = "~/Music"
 
+# Encoding
+system_encoding = "UTF-8"
+
 # --| Behaviour |-- #
 mpd_crossfade_time = "2"
 message_delay_time = 1
@@ -14,43 +17,70 @@ ignore_leading_the = "no"
 allow_for_physical_item_deletion = "no"
 
 # --| Integrating other programs |-- #
-execute_on_song_change = "sh ~/.config/.script/notification/music-notify.sh"
 external_editor = "nvim"
 use_console_editor = yes
 mouse_support = "yes"
-mouse_list_scroll_whole_page = "no"
+mouse_list_scroll_whole_page = "yes"
 lines_scrolled = "1"
 
-# --| Progress Bar look |-- #
-progressbar_look = "━━─"
-#progressbar_look = " •"
-#
 
-###################
-### Screen 1
-###################
-# Song columns format #
-# This is basically the first screen (1)
-# song_columns_list_format = "$L(9)[white]{l} (20)[red]{a} (30)[green]{b}$R(20)[cyan]{t}"
-# song_columns_list_format = "(25)[white]{a} (25)[blue]{brE} (47)[white]{t|f} (6f)[blue]{l}"
-# song_columns_list_format = "(15)[yellow]{lr} (1)[black]{} (40)[red]{a} (40)[green]{t}"
-# song_columns_list_format = "(40)[magenta]{ar} (40)[green]{t}" # this one is like the one below, but not quite centered
-song_columns_list_format = "(50)[magenta]{ar} (50)[green]{t}"
+# Global
+playlist_shorten_total_times = "yes"
+browser_display_mode = "columns"
+user_interface = "classic"
+alternative_header_second_line_format = "$3  $2  $3"
+alternative_ui_separator_color = "yellow"
+alternative_header_first_line_format = "{ $3 $2 $4Pika Player $2 $3 }"
+follow_now_playing_lyrics = "yes"
+locked_screen_width_part = "32"
+ask_for_locked_screen_width_part = "no"
+display_bitrate = "no"
+main_window_color = "yellow"
+state_line_color = "yellow"
+volume_color = "red"
+#main_window_highlight_color = 7
+startup_slave_screen = playlist
+startup_screen = visualizer
+
+#execute_on_song_change=~/.scripts/notification/ncmpcpp.sh
+
+# --| Progress Bar look |-- #
+progressbar_look = " •"
+#progressbar_look = "▂▂▂"
+#progressbar_look = "─◾"
+#progressbar_look = "━━━"
+#progressbar_look = "•••"
+progressbar_color = "black"
+progressbar_elapsed_color = 7
+
+# --| UI Visibility |-- #
+header_visibility = "no"
+statusbar_visibility = "yes"
+titles_visibility = "no"
+enable_window_title = "yes"
+
+# --| Song Name Appearance |-- #
+song_status_format = "{$b$2 $5%a $3$4$2 $4%t}|{$b$2 $8%f}"
+
+statusbar_color = "green"
+color1 = "yellow"
+color2 = "blue"
+
+# --| List Format (Screen 1) |-- #
+song_columns_list_format= "(3f)[green]{} (60)[green]{t|f:Title} (34)[yellow]{ar|brE} (1)[]{}"
 playlist_display_mode = "columns" #possible values: columns/classic
 
-###################
-### Screen 2
-###################
-# Song list #
-# basically, by default this is screen number 2 (just press 2 on your keyboard)
-# song_list_format = "{$8%a ⠂ }{%t}$R{%l}"
-song_list_format = "{{$6%a $3}{%t}}|{%f} $R$5%b $5%l"
+# --| Song list |-- #
+song_list_format = "{$3%t $R $2 $4 $4  $4%l$4}|{$3%f $R $2 $4 $3 $R $4%l$4}"
+
+song_window_title_format = "{%a - %t}|{%f}"
+
 
 ###################
 ### Screen 3
 ###################
 # Search engine
-search_engine_display_mode = "classic" # this only shows in the songs found
+search_engine_display_mode = "columns" # this only shows in the songs found
 
 ###################
 ### Screen 4
@@ -60,29 +90,35 @@ search_engine_display_mode = "classic" # this only shows in the songs found
 # I'd like that one to be displayed by default but don't yet know how to do it
 song_library_format = "{{$b$6%a} {$3%t}}|{$b$5%f}"
 
-###################
-### Screen 5
-###################
-# Playlist 
-# options: classic/columns
-playlist_editor_display_mode = "classic"
+# --| Playlist (Screen 5) |-- #
+playlist_editor_display_mode = "columns"
 
-###################
-### Screen 6
-###################
-# Tag editor
-# Currently there's nothing configured for it
 
-###################
-### Screen 7
-###################
-# there's a menu on screen 7, but you can't really configure it much
-
-###################
-### Screen 8
-###################
-### Visualizer ###  
-visualizer_fifo_path = /tmp/mpd.fifo
-visualizer_output_name = "mpd_visualizer"
-visualizer_in_stereo = "yes"
+# --| Visualizer |-- #
+visualizer_in_stereo = "no"
 visualizer_sync_interval = 30
+visualizer_data_source = "/tmp/mpd.fifo"
+visualizer_fps = 60
+visualizer_output_name = "Visualizer"
+#visualizer_type = "ellipse"
+#visualizer_type = "spectrum"
+visualizer_type = "wave"
+visualizer_spectrum_smooth_look = no
+#visualizer_look = "▐"
+#visualizer_look = "▗"
+#visualizer_look = "▉▉"
+#visualizer_look = "▗"
+#visualizer_look = "◾▍"
+#visualizer_look = "▮▍"
+#visualizer_look = "▍▍"
+#visualizer_look = "││"
+visualizer_look = "▮▮"
+#visualizer_look = "▋▋"
+#visualizer_look = "●┃"
+#visualizer_look = "+|"
+#visualizer_look = "▄▍"
+#visualizer_look = "●●"
+#visualizer_look = "●▗"
+#visualizer_look = ""
+visualizer_color = "red,yellow,green,blue,red,yellow,green,blue"
+

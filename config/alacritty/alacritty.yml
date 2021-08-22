@@ -6,9 +6,10 @@
 colors:
   primary:
     # for hard contrast: #1b1b23
+    # for neutral contrast: #20202a
     # for soft contrast: #2c2e3e
-    background:        &aquarium_bg '#1b1b23'
-    foreground:        '#8791a3'
+    background:        &aquarium_bg '#20202a'
+    foreground:        '#c8cedc'
     bright_foreground: '#a0a8b6'
     dim_foreground:    '#4c5664'
 

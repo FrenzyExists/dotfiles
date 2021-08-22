@@ -6,17 +6,34 @@
 # set root pointer
 xsetroot -cursor_name left_ptr
 
+bspc config pointer_modifier mod1
+
+sh ~/.scripts/notification/hello.sh &
+
 # Wallpaper
-feh --bg-fill ~/Pictures/gen_1_starters_full.png
+feh --bg-fill /home/frenzy/Pictures/wallpapers/Aquarium/gen_1_starters_alt_3.png
 
 # key bindings
 sxhkd &
+
+# Mice bindings
+#   Set mouse 1 to move floating windows
+bspc config pointer_action1 move
+
+#   Mouse 2 button resizes the window by side
+bspc config pointer_action2 resize_side
+
+#   Mouse 3 button (right mouse) resize by corner
+bspc config pointer_action2 resize_corner
 
 # Viva el spanish!!!
 setxkbmap -layout us -variant altgr-intl
 
 # Fuck CapsLock, all my homies hate CapsLock
 setxkbmap -option caps:swapescape
+
+# Fire eww Daemon
+~/eww/target/release/eww daemon &
 
 # panel
 zsh ~/.config/polybar/launch.sh
@@ -34,8 +51,10 @@ xset r rate 250 40
 bspc rule -a Alacritty rectangle=780x460+0+0 center=true
 
 # Gap n border
+
 bspc config window_gap 16
 bspc config border_width 20
+
 
 bspc config split_ratio 0.62
 bspc config borderless_monocle true
@@ -49,9 +68,9 @@ bspc config pointer_action3 resize_corner
 
 
 # Stolen form Gk, because I'm too stupid to actually learn how to use chwb2
-outer='0x1b1b23'   # outer
-inner1='0x4c5664'  # focused
-inner2='0x292936'  # normal
+outer='0x20202A'   # outer
+inner1='0x414560'  # focused
+inner2='0x2c2e3e'  # normal
 
 targets() {
 	case $1 in
