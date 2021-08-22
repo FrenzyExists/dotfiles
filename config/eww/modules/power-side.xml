@@ -1,0 +1,44 @@
+<eww>
+    <definitions>
+    <!-- Top Bar thingy -->
+
+    <!-- Right Sidebar Container -->
+    <def name="righty">
+        <box class="container right-outer-container">
+            <box class="border-right-container">
+                <box class="right-container" orientation="v" space-evenly="true">
+                    <shutdown/>
+                    <reboot/>
+                    <quit/>
+                </box>
+            </box>
+        </box>
+    </def>
+
+    <!-- Right Sidebar Buttons -->
+    <def name="shutdown">
+        <box orientation="h" space-evenly="true">
+            <box class="btn shutdown-btn" orientation="h" halign="center">
+                <button onclick="shutdown now"></button>
+            </box>
+        </box>
+    </def>
+    <def name="reboot">
+        <box orientation="h" space-evenly="true">
+            <box class="btn reboot-btn" orientation="h" halign="center">
+                <button onclick="reboot"></button>
+            </box>
+        </box>
+    </def>
+    <def name="quit">
+        <box orientation="h" space-evenly="true">
+          <box class="btn quit-btn" orientation="h" halign="center">
+              <button onclick="~/eww/target/release/eww close rightSidebar"></button>
+            </box>
+        </box>
+    </def>
+    <!-- End of Right Widgets -->
+
+  </definitions>
+
+</eww>

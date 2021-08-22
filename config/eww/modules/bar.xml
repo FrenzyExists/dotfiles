@@ -1,0 +1,81 @@
+<eww>
+    <definitions>
+    <!-- Top Bar thingy -->
+
+    <def name="bar-1">
+      <box class="bar" halign="fill">
+        <left/>
+        <workspaces-1/>
+        <tray/>
+      </box>
+  </def>
+
+    <def name="left">
+      <box class="left" orientation="h" space-evenly="false" spacing="15" halign="start">
+        <link/><vsplit/>
+        <button orientation="h" class="{{mpris.status}}" halign="fill" onclick="playerctl play-pause">
+          <label text="{{if (mpris.status) == 'Paused' then '契' else ''}}  {{mpris.text}}" halign="center" limit-width="60"></label>
+        </button>
+      </box>
+    </def>
+
+    <def name="workspaces-1">
+        <box class="workspaces-1" spacing="10" space-evenly="false" halign="center" orientation="h">
+            <button onclick="wmctrl -s 1"></button>
+            <button onclick="wmctrl -s 2"></button>
+            <button onclick="wmctrl -s 3"></button>
+            <button onclick="wmctrl -s 4"></button>
+            <button onclick="wmctrl -s 5"></button>
+            <button onclick="wmctrl -s 6"></button>
+        </box>
+    </def>
+
+    <def name="tray">
+      <box class="tray" orientation="h" space-evenly="false" spacing="15" halign="end">
+        <button class="tray-info" orientation="h" spae-evenly="false"
+          onclick="kill -INT $(pgrep wf-recorder)"
+          style="color: #cb7073;" spacing="15" halign="end" visible="{{recorder}}">
+          recording
+        </button>
+        <box 
+          style="font-size: 14px; margin-right: 10px"
+          class="volume" orientation="h" space-evenly="false" spacing="15" halign="end">
+          <scale width="200" min="0" max="100" valign="center" value="{{volume}}" onscroll="~/.local/bin/volume {}"/>
+        </box>
+        <box class="{{if pacman &gt; 0 then 'pacman' else 'none'}}" halign="fill">
+          <button onclick="foot paru &amp;"> {{pacman}} ﰭ </button>
+        </box>
+        <button style="color: #9da98d;" halign="fill" onclick="nm-connection-editor &amp;">
+          {{if network!='' then '直 connected' else '  disconnected'}}
+        </button>
+        <button
+          style="font-size: 12px; font-weight: 600; color: #6f6f6f"
+          onclick="~/.local/bin/toggle notification" halign="end">{{if content == '' then '' else ''}}</button>
+        <vsplit/>
+        <button class="time" 
+          style="font-size: 11px; font-weight: 600;"
+          onclick="~/.config/eww/templates/power" halign="end">{{time}}</button>
+      </box>
+    </def>
+    <def name="vsplit">
+      <box>
+      <label text="|" style="color: #474747"></label>
+      </box>
+    </def>
+    <def name="link">
+      <box class="link" orientation="h" space-evenly="true" spacing="25" halign="fill">
+        <button style="color: #dcbb8c" onclick="xdg-open https://github.com/"></button>
+        <button style="color: #d59877" onclick="xdg-open https://www.reddit.com/"></button>
+        <button style="color: #6F8798" onclick="chromium --app=https://fluffychat.im/web"></button>
+        <button style="color: #cb7073" onclick="xdg-open https://www.youtube.com/">輸</button>
+      </box>
+    </def>
+  </definitions>
+  <variables>
+    <var name="recorder">false</var>
+    <script-var name="ristate">~/.local/bin/ristate -t -vt</script-var>
+    <script-var interval="600s" name="pacman">checkupdates | wc -l</script-var>
+    <script-var name="mpris">playerctl metadata --format '{"text": "{{title}}", "status": "{{status}}"}' -F</script-var>
+    <script-var interval="60s" name="network">nmcli -p -g {connection} | grep -e 'connected to' | sed -e 's/ .* //' -e 's/.*://'</script-var>
+  </variables>
+</eww>

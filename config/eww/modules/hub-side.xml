@@ -1,0 +1,73 @@
+<eww>
+    <definitions>
+
+        <!-- Top Bar Container Thingy -->
+        <def name="topty">
+           <box class="container top-container" orientation="h" space-evenly="true">
+                <box orientation="v">   
+                    <uptime/>
+                    <system/>
+                </box>
+                <box orientation="v">   
+                    <calendar-boi/>
+                </box>
+            </box>
+        </def>
+
+	<!-- System -->
+	<def name="system">
+		<box class="genwin" vexpand="false" hexpand="false">
+			<box class="e" orientation="v" spacing="10" halign="center" valign="center" space-evenly="false" vexpand="false" hexpand="false">
+				<box class="cpu_bar" orientation="h" spacing="20" space-evenly="false" vexpand="false" hexpand="false" halign="center">
+					<label class="iconcpu" text="﬙"/>
+					<scale min="0" max="100" value="{{CPU_USAGE}}" active="false"/>
+				</box>
+				<box class="mem_bar" orientation="h" spacing="20" space-evenly="false" vexpand="false" hexpand="false" halign="center">
+					<label class="iconmem" text=""/>
+					<scale min="0" max="100" value="{{MEM_USAGE}}" active="false"/>
+				</box>
+			</box>
+		</box>
+    </def>
+
+    <!-- uptime -->
+    <def name="uptime">
+        <box class="genwin">
+            <box class="e" orientation="h" halign="center" spacing="40" space-evenly="false" vexpand="false" hexpand="false">
+                <label class="icontimer" valign="center" text="祥"/>
+			    <box orientation="v" valign="center" spacing="0" space-evenly="false" vexpand="false" hexpand="false">
+                    <label class="uphour" halign="start" wrap="true" limit-width="24" text="{{UPHOUR}}"/>
+                    <label class="upmin" halign="start" wrap="true" limit-width="25" text="{{UPMIN}}"/>
+		        </box>
+            </box>
+        </box>
+    </def>
+    
+    <!-- Calendar -->
+    <def name="calendar-boi">
+        <box class="calendar-dark e" orientation="v" space-evenly="false" valign="center">
+            <label class="calendar-date" text="{{weekday}}, {{month}} {{day_num}}" halign="center"/>
+            <calendar show-day-names="true" show-heading="true" onclick="~/.config/eww/scripts/calendar.sh {}"/>
+        </box>
+    </def>
+
+    <!-- Quote Shit -->
+    <def name="quote-boi">
+        <box orientation="h">
+	        <box class="quote-info" orientation="h" space-evenly="false">
+                <label class="quote-author-dark" text="- {{quote-author}} "/>
+                <label class="quote-title-dark" text="({{quote-title}})"/>
+                </box>
+            <box orientation="v" space-evenly="false" valign="center">
+                <label class="quote-number-dark" text="#{{quote-number}}" halign="end"/>
+                <label class="quote-time-dark" text="{{quote-time}} min until new quote" halign="end"/>
+            </box>
+        </box>
+    </def>
+
+
+
+    </definitions>
+
+</eww>
+ 

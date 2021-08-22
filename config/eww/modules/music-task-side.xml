@@ -1,0 +1,127 @@
+<eww>
+  <definitions>
+    <!-- This is the place where you structure your widgets, align them and stuff. -->
+
+    <!-- Left Sidebar Container -->
+    <def name="lefty">
+        <box class="container left-container">
+            <big-chungus/>
+        </box>
+    </def>
+
+    <!-- MP3, Task, Profile -->
+    <def name="big-chungus">
+        <box class="chungus-container" orientation="v" space-evenly="false">
+            <box class="button-container" orientation="h" hexpand="false" space-evenly="false" halign="center">
+                <button class="music-button btn lefty-btn" ></button>
+                <label class="divisor" text="|"></label>
+                <button class="task-button btn lefty-btn">ﴬ</button>
+            </box>
+            <box class="lil-chungus">
+                <box class="music-container" orientation="v" space-evenly="false">
+                    <weather-boi/>
+                    <music-boi/>
+                </box>
+           </box>
+        </box>
+    </def>
+    
+    <!-- Weather -->    
+    <def name="weather-boi">
+        <box class="weather-container" orientation="h" hexpand="true">
+            <label class="weather-icon" style="color: {{weather-hex}}" text="{{weather-icon}}"></label>
+        </box>
+    </def>
+
+    <!-- Music -->
+    <def name="music-thingy">
+        <box orientation="h" space-evenly="true">
+            <box class="song-art" style="background-image: url('{{art}}');">{{song_art}}</box>
+            <box class="song-data" orientation="v" space-evenly="false">
+                <box class="song-title">{{song_title}}</box>
+                <box class="player-btn" orientation="h" halign="center">
+                    <button onclick="playerctl previous"></button>
+                    <button class="pause-play" onclick="playerctl play-pause"></button>
+                    <button onclick="playerctl next"></button>
+                </box>
+            </box>
+        </box>
+    </def>
+
+
+    <def name="music-boi">
+        <box orientation="v" space-evenly="true">
+            <box class="song-data" orientation="h" space-evenly="false" spacing="20">
+                <box class="album-art" interval="5s" style="background-image: url('/tmp/kunst.png');"></box>
+                <box class="player-btn" orientation="v" halign="center" valign="center">
+                    <button onclick="mpc previous"></button>
+                    <button class="pause-play" onclick="mpc toggle"></button>
+                    <button onclick="mpc next"></button>
+                </box>
+            </box>
+            <scale name="song-duration"></scale>
+        </box>
+    </def>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<def name="calendar-dark">
+			<box class="main" orientation="h" space-evenly="false">
+				<box class="calendar-dark" orientation="v" space-evenly="false">
+					<label class="calendar-year-dark" text="{{year_cal}}" halign="start"/>
+					<label class="calendar-date" text="{{weekday_cal}}, {{month_cal}} {{day_num_cal}}" halign="start"/>
+					<calendar show-day-names="true" show-heading="true" halign="start" valign="center" onclick="~/.config/eww/scripts/calendar.sh {}"/>
+				</box>
+				<box class="calendar-info" orientation="v" space-evenly="false" halign="start" valign="center" hexpand="true">
+					<box class="quote-container" orientation="v" hexpand="false" vexpand="true">
+						<label class="quote" halign="start" text="&quot;{{quote-text}}&quot;" wrap="true" width="20"/>
+						<box orientation="h">
+							<box class="quote-info" orientation="h" space-evenly="false">
+								<label class="quote-author-dark" text="- {{quote-author}} "/>
+								<label class="quote-title-dark" text="({{quote-title}})"/>
+							</box>
+							<box orientation="v" space-evenly="false" valign="center">
+								<label class="quote-number-dark" text="#{{quote-number}}" halign="end"/>
+								<label class="quote-time-dark" text="{{quote-time}} min until new quote" halign="end"/>
+							</box>
+						</box>
+					</box>
+					<box class="calendar-container-light" orientation="v" space-evenly="false">
+						<box space-evenly="false" orientation="h">
+							<label class="next-app-text" text="Next appointment &quot;"/>
+							<label class="next-app" text="{{next_appointment}}"/>
+							<label class="next-app-text" text="&quot; in "/>
+							<label class="next-app" text="{{next_appointment_time}}"/>
+						</box>
+						<expander name="Appointments" vexpand="true" expanded="false">
+							<box orientation="h" space-evenly="false">
+								<label class="app-times" text="{{appointment_times}}"/>
+								<label class="app-names" text="{{appointment_names}}"/>
+							</box>
+						</expander>
+						<expander name="Tasks" vexpand="true" expanded="false">
+							<label class="todo-names" text="{{todo}}" halign="start"/>
+						</expander>
+					</box>
+				</box>
+			</box>
+		</def>
+
+
+
+  </definitions>
+
+</eww>

@@ -1,0 +1,38 @@
+<!-- Only script-vars are included here, the majority of variables are created by the wrapper script -->
+<eww>
+<variables>
+    
+    <!-- Uptime vars -->
+	<script-var name="UPHOUR" interval="5s">uptime -p | awk '{print $2 " " $3}' | sed 's/,//g'</script-var>
+	<script-var name="UPMIN" interval="5s">uptime -p | awk '{print $4 " " $5}'</script-var>
+
+    <!-- System vars -->
+	<script-var name="HOST" interval="5s">hostname</script-var>
+	<script-var name="CPU_USAGE" interval="1s">~/.config/eww/scripts/sys_info --cpu</script-var>
+	<script-var name="MEM_USAGE" interval="1s">~/.config/eww/scripts/sys_info --mem</script-var>
+	<script-var name="BLIGHT" interval="1s">~/.config/eww/scripts/sys_info --blight</script-var>
+	<script-var name="BATTERY" interval="5s">~/.config/eww/scripts/sys_info --bat</script-var>
+
+	<!-- Date -->
+	<script-var name="day_num" interval="2h">date "+%d"</script-var>
+	<script-var name="month" interval="12h">date "+%b"</script-var>
+	<script-var name="weekday" interval="2h">date "+%a"</script-var>
+    <script-var name="min" interval="10s">date "+%M"</script-var>
+	<script-var name="year" interval="10s">date "+%Y"</script-var>
+	<script-var name="hour" interval="25s">date "+%I"</script-var>
+	<script-var name="ampm" interval="1h">date "+%P"</script-var>
+
+	<!-- Calcurse -->
+	<script-var name="next_appointment" interval="1m">~/.config/eww/scripts/check-todo.sh appoint</script-var>
+	<script-var name="next_appointment_time" interval="1m">~/.config/eww/scripts/check-todo.sh appoint-time</script-var>
+
+    <!-- Music -->
+    <script-var name="album-art" interval="30s">/tmp/kunst.jpg</script-var>
+
+
+	<!-- Weather -->
+    <script-var name="weather-icon" interval="25m">echo ""</script-var>
+    <script-var name="weather-info" interval="25m">echo "Don't die"</script-var>
+    <script-var name="weather-temperature" interval="25m">echo "30° C"</script-var>
+</variables>
+</eww>
