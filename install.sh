@@ -1,7 +1,15 @@
 sudo pacman --noconfirm -Syu
-sudo pacman --noconfirm  -S yay xorg xorg-xinit xorg-xinput
+sudo pacman --noconfirm  -S rustup cargo alacritty bspwm dunst i3 kitty mpd ncmpcpp neovim picom polybar qutebrowser ranger rofi zathura zsh  xorg xorg-xinit xorg-xinput unzip
 
-yay -S alacritty bspwm dunst eww i3 kitty mpd ncmpcpp neovim picom polybar qutebrowser ranger rofi zathura zsh 
+wget https://github.com/elkowar/eww/archive/refs/tags/v0.1.0.zip
+unzip v0.1.0.zip
+cd eww-0.1.0/
+cargo build --release
+cd target/release
+chmod +x ./eww
+sudo cp eww ~/usr/bin
+sudo cp eww ~/usr/sbin
+cd -
 git clone https://github.com/mlvzk/discocss
 cp discocss/discocss /usr/bin
 
