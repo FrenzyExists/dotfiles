@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-tile '/home/frenzy/Pictures/wallpapers/Monochrome/pikaWall_III.png' 
+feh --no-fehbg --bg-tile '~/Pictures/wallpapers/Monochrome/pikaWall_III.png' 
