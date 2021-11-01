@@ -1,0 +1,25 @@
+
+# Home Directories n stuff
+Documents/
+Downloads/
+Pictures/
+Music/
+
+.themes/
+.ssh/
+.python_history
+.m2/
+.java/
+.icons/
+.sbt/
+.cache/
+.bash_history
+.fehbg
+.jdks/
+.mozilla/
+.ivy2/
+.gtkrc-2.0
+.jgmenu-lockfile
+.config/mpd/mpd.log
+.config/mpd/mpdstate
+.config/nvim/
