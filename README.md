@@ -1,10 +1,10 @@
 # ~/dotfiles
 
 <p align="center">
-    <a href="https://github.com/FrenzyExists/dotfiles/stargazers"><img src="https://img.shields.io/github/stars/FrenzyExists/aquarium-vim?colorA=20202a&colorB=cddbf9&style=for-the-badge&logo=starship style=flat-square"></a>
-    <a href="https://github.com/FrenzyExists/dotfiles/releases/latest"><img src="https://img.shields.io/github/release/FrenzyExists/aquarium-vim.svg?&style=for-the-badge&label=Release&logo=github&logoColor=eceff4&colorA=20202a&colorB=f6bbe7"/></a> 
-    <a href="https://github.com/FrenzyExists/dotfiles/issues"><img src="https://img.shields.io/github/issues/FrenzyExists/aquarium-vim?colorA=20202a&colorB=e6dfb8&style=for-the-badge&logo=bugatti"></a>
-    <a href="https://github.com/FrenzyExists/dotfiles/network/members"><img src="https://img.shields.io/github/forks/FrenzyExists/aquarium-vim?colorA=20202a&colorB=ebb9b9&style=for-the-badge&logo=github"></a>
+    <a href="https://github.com/FrenzyExists/dotfiles/stargazers"><img src="https://img.shields.io/github/stars/FrenzyExists/dotfiles?colorA=20202a&colorB=cddbf9&style=for-the-badge&logo=starship style=flat-square"></a>
+    <a href="https://github.com/FrenzyExists/dotfiles/releases/latest"><img src="https://img.shields.io/github/release/FrenzyExists/dotfiles.svg?&style=for-the-badge&label=Release&logo=github&logoColor=eceff4&colorA=20202a&colorB=f6bbe7"/></a> 
+    <a href="https://github.com/FrenzyExists/dotfiles/issues"><img src="https://img.shields.io/github/issues/FrenzyExists/dotfiles?colorA=20202a&colorB=e6dfb8&style=for-the-badge&logo=bugatti"></a>
+    <a href="https://github.com/FrenzyExists/dotfiles/network/members"><img src="https://img.shields.io/github/forks/FrenzyExists/dotfiles?colorA=20202a&colorB=ebb9b9&style=for-the-badge&logo=github"></a>
 </p>
 
 <h3 align="center">Hi! These are my dotfiles</h3>
