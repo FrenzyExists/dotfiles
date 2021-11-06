@@ -9,7 +9,13 @@
 # By Detective Pikachu                                       #
 ##############################################################
 
+# ---| Misc. |--- #
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
 # ---| Imports |--- #
+include-file = ~/.config/polybar/colors.ini 
 include-file = ~/.config/polybar/modules.ini
 
 [bar]
@@ -44,6 +50,20 @@ border-bottom-size = 12
 bottom = true
 background = #000f0f0f
 
+# ---| Bottom Bar (BSPWM) |--- #
+[bar/bottomboi]
+inherit = bar/base
+modules-right = memory cpu center-border-two filesystem
+modules-left = keyboard center-border-two speed
+
+height = 26
+padding = 2
+border-bottom-size = 2
+border-top-size = 2
+border-color = ${color.gui07}
+bottom = true
+background = ${color.gui07}
+
 [bar/top]
 inherit = bar/base
 font-0 = Cartograph CF:style=SemiBold:pixelsize=13;4
@@ -53,18 +73,15 @@ font-3 = UbuntuMono Nerd Font:style=Regular:size=24.1;5.2
 font-4 = UbuntuMono Nerd Font:style=Regular:size=20;4
 font-5 = Font Awesome 5 Pro Solid:size=16;4.4
 font-6 = Font Awesome 5 Pro Solid:size=12;4.5
+font-7 = Agave Nerd Font:size=18;4
 
-background = #000f0f0f
+background = ${color.gui00}
+border-color = ${color.gui00}
 modules-center = right-border bspwm left-border
-modules-right = right-border backlight left-border right-border battery left-border right-border time left-border powermenu
+modules-right = right-border backlight left-border right-border battery left-border right-border pulseaudio_simple left-border right-border time left-border powermenu
 modules-left = right-border bsplayout left-border wlan center-border mpd 
 height = 32
 border-top-size = 10
 border-bottom-size = 6 
 border-right-size = 10
 border-left-size = 10
-# ---| Misc. |--- #
-[global/wm]
-margin-top = 0
-margin-bottom = 0
-

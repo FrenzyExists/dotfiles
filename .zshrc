@@ -102,6 +102,8 @@ alias stlre="sudo systemctl restart"
 alias stlen="sudo systemctl enable --now"
 alias stldis="sudo systemctl disable"
 
+alias v="nvim"
+
 # Configs
 alias config="nvim ~/.zshrc"
 alias config-bspwm="nvim ~/.config/bspwm/bspwmrc"
@@ -117,17 +119,34 @@ alias config-i3="nvim ~/.config/i3/config"
 alias config-ncmpcpp='nvim ~/.config/ncmpcpp/config'
 alias config-mpd="nvim ~/.config/mpd/mpd.conf"
 alias config-ranger="nvim ~/.config/ranger/"
+alias config-polybar-bars="nvim ~/.config/polybar/config"
+alias config-polybar-modules="nvim ~/.config/polybar/modules.ini"
 
 alias gotoProjects="cd ~/Documents/Projects/"
 alias gotoDownloads="cd ~/Downloads/"
+alias gotoDocuments="cd ~/Documents/"
+alias gotoPictures="cd ~/Pictures/"
+alias gotoRustPrjs="cd ~/Documents/Projects/rust-projects/"
+alias gotoBashPrjs="cd ~/Documents/Projects/script-projects/"
 alias gotoWallpapers="cd ~/Pictures/wallpapers"
 alias gotoVimPrjs="cd ~/Documents/Projects/vim-projects/"
+
+# Tmux
+alias t-attach='tmux attach -t'
+alias t-attach-d='tmux attach -d -t'
+alias t-new='tmux new-session -s'
+alias t-list='tmux list-sessions'
+alias t-kill-s='tmux kill-server'
+alias t-kill-ss='tmux kill-session -t'
 
 # Network
 alias net-show='nmcli connection show'
 alias net-dev='nmcli device'
 alias net-up='nmcli connection up uuid'
 alias net-deco='nmcli device disconnect'
+
+
+# ---| Functions N Stuff |--- #
 
 # ---| Turn Ctrl+Z into a toggle switch |--- #
 ctrlz() {
@@ -143,6 +162,10 @@ bindkey '^Z' ctrlz
 # Show top 21 Commands used (thanks totoro
 toppy() {
     history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n 21
+}
+
+file_amount() {
+    ls -l | wc -l
 }
 
 # ls with preferred arguments
@@ -164,6 +187,16 @@ src() {
 	exec zsh
 }
 
+node-project() {
+  git init
+  npx license $(npm get init.license) -o "$(npm get init.author.name)" > LICENSE
+  npx gitignore node
+  npx covgen "$(npm get init.author.email)"
+  npm init -y
+  git add -A
+  git commit -m "Initial commit"
+}
+
 # less/manpager colours
 export MANWIDTH=80
 export LESS='-R'
@@ -181,6 +214,15 @@ export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
 export EDITOR=/usr/bin/nvim
 export SUDO_EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
+
+# Firefox plz
+export BROWSER=/usr/bin/firefox
+
+# Some Rust Lang thing idk
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Lang
+export LANG=en_US.UTF-8
 
 # Starship export
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
@@ -319,6 +361,11 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 zstyle -e ':completion:*:hosts' hosts 'reply=( ${=${=${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ } ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2>/dev/null))"}%%\#*} ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}})'
 ttyctl -f
+
+# For tty
+if [ "$TERM" = "linux" ] ; then
+    echo -en "\e]P0232323"
+fi
 
 # initialize completion
 compinit -u -d "$compfile"
