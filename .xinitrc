@@ -16,5 +16,5 @@ fi
 [ -r ~/.xprofile ] && . ~/.xprofile
 
 # launch the session, commands below this line will be ignored
-exec awesome
-#exec bspwm
+#exec awesome
+exec bspwm
