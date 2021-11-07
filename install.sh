@@ -1,5 +1,26 @@
 sudo pacman --noconfirm -Syu
-sudo pacman --noconfirm  -S rustup cargo alacritty bspwm dunst i3 kitty mpd ncmpcpp neovim picom polybar qutebrowser ranger rofi zathura zsh  xorg xorg-xinit xorg-xinput unzip
+sudo pacman --noconfirm  -S rustup \
+                            cargo \
+                            alacritty \
+                            bspwm \
+                            dunst \
+                            i3 \
+                            kitty \
+                            mpd \
+                            ncmpcpp \
+                            neovim \
+                            picom \
+                            polybar \
+                            ranger \
+                            rofi \
+                            zathura \
+                            zsh \
+                            xorg \
+                            xorg-xinit \
+                            xorg-xinput \
+                            unzip \
+                            awesome \
+                            bottom \
 
 wget https://github.com/elkowar/eww/archive/refs/tags/v0.1.0.zip
 unzip v0.1.0.zip
