@@ -1,4 +1,4 @@
 add_newline = true
 
 [character]
-success_symbol = " [](blue) [](green) [](yellow) [](red)"
+success_symbol = " [](blue) [](green) [](yellow) [](red)"

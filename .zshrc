@@ -1,10 +1,15 @@
-# Frenzy's
-# ███████ ███████ ██   ██      ██████  ██████  ███    ██ ███████ ██  ██████ 
-#    ███  ██      ██   ██     ██      ██    ██ ████   ██ ██      ██ ██      
-#   ███   ███████ ███████     ██      ██    ██ ██ ██  ██ █████   ██ ██   ███
-#  ███         ██ ██   ██     ██      ██    ██ ██  ██ ██ ██      ██ ██    ██
-# ███████ ███████ ██   ██      ██████  ██████  ██   ████ ██      ██  ██████ 
+#! /bin/zsh
 
+###############################################################
+# ______ _____ _   _   _____ _____ _   _ ______ _____ _____   #
+# |___  //  ___| | | | /  __ \  _  | \ | ||  ___|_   _|  __ \ #
+#    / / \ `--.| |_| | | /  \/ | | |  \| || |_    | | | |  \/ #
+#   / /   `--. \  _  | | |   | | | | . ` ||  _|   | | | | __  #
+# ./ /___/\__/ / | | | | \__/\ \_/ / |\  || |    _| |_| |_\ \ #
+# \_____/\____/\_| |_/  \____/\___/\_| \_/\_|    \___/ \____/ #
+#                                                             #
+# By Detective Pikachu                                        #
+###############################################################
 
 if [[ $- != *i* ]]; then
 	return
@@ -44,7 +49,7 @@ alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mirror-update='sudo reflector --verbose --score 100 -l 50 -f 10 --sort rate --save /etc/pacman.d/mirrorlist'
 
 # Pacman, but its too verbose
-alias gogoPacmanUnninstall='sudo pacman -R'
+alias gPacU='sudo pacman -R'
 alias gogoPacmanInstallUpdate='sudo pacman -Syu'
 alias gogoPacmanUpgrade="sudo pacman -U"
 alias gogoPacmanAnnihilate="sudo pacman -Rns"
@@ -73,16 +78,18 @@ alias z='zip -r' # z <archive_compress> <file_list>
 alias uz='unzip' # uz <archive_decompress> -d <dir>
 
 # Git
-alias gi='git init'
-alias gs='git status -sbu'
-alias gco='git checkout'
-alias gcob='git checkout -b'
-alias gp='git push'
-alias ga='git add .'
-alias gm='git merge'
-alias gst='git stash'
-alias gstl='git stash list'
-alias glg='git log --graph --oneline --decorate --all'
+alias gi='git init' \
+      gs='git status -sbu' \
+      gco='git checkout' \
+      gcob='git checkout -b' \
+      gp='git push' \
+      ga='git add .' \
+      gm='git merge' \
+      gst='git stash' \
+      gstl='git stash list' \
+      glg='git log --graph --oneline --decorate --all' \
+      gu="git submodule foreach '(git checkout master || git checkout set_net_wm_pid) && git pull'" \
+      gC="git remote prune origin && git repack && git prune-packed && git reflog expire --expire=1.month.ago && git gc"
 
 # MPD
 alias mpd_start='systemctl start mpd.service mpdscribble.service --user'
@@ -102,25 +109,30 @@ alias stlre="sudo systemctl restart"
 alias stlen="sudo systemctl enable --now"
 alias stldis="sudo systemctl disable"
 
+alias diff="diff --color=auto"
+
 alias v="nvim"
 
 # Configs
-alias config="nvim ~/.zshrc"
-alias config-bspwm="nvim ~/.config/bspwm/bspwmrc"
-alias config-sxhkd="nvim ~/.config/sxhkd/sxhkdrc"
-alias config-nvim="nvim ~/.config/nvim/init.vim"
-alias config-zathura="nvim ~/.config/zathura/zathurarc"
-alias config-dunst="nvim ~/.config/dunst/dunstrc"
-alias config-alacritty="nvim ~/.config/alacritty/alacritty.yml"
-alias config-tint="nvim ~/.config/tint2/tint2rc"
-alias config-picom="nvim ~/.config/picom.conf"
-alias config-kitty="nvim ~/.config/kitty/kitty.conf"
-alias config-i3="nvim ~/.config/i3/config"
-alias config-ncmpcpp='nvim ~/.config/ncmpcpp/config'
-alias config-mpd="nvim ~/.config/mpd/mpd.conf"
-alias config-ranger="nvim ~/.config/ranger/"
-alias config-polybar-bars="nvim ~/.config/polybar/config"
-alias config-polybar-modules="nvim ~/.config/polybar/modules.ini"
+# "${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}
+alias config="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}.zshrc" \
+      c-bspwm="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/bspwm/bspwmrc" \
+      c-sxhkd="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/sxhkd/sxhkdrc" \
+      c-nvim-o="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/.config/nvim/lua/options.lua" \
+      c-nvim-b="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/.config/nvim/lua/bindings.lua" \
+      c-zathura="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/zathura/zathurarc" \
+      c-dunst="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/dunst/dunstrc" \
+      c-alacritty="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/alacritty/alacritty.yml" \
+      c-tint="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/tint2/tint2rc" \
+      c-xres="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME"}/.Xresources" \
+      c-picom="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME"}/picom.conf" \
+      c-kitty="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/kitty/kitty.conf" \
+      c-i3="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/i3/config" \
+      c-player="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/ncmpcpp/config" \
+      c-mpd="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/mpd/mpd.conf" \
+      c-poly-bars="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/polybar/config" \
+      c-poly-modules="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/polybar/modules.ini" \
+      c-poly-colors="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/polybar/colors.ini" 
 
 alias gotoProjects="cd ~/Documents/Projects/"
 alias gotoDownloads="cd ~/Downloads/"
@@ -132,19 +144,30 @@ alias gotoWallpapers="cd ~/Pictures/wallpapers"
 alias gotoVimPrjs="cd ~/Documents/Projects/vim-projects/"
 
 # Tmux
-alias t-attach='tmux attach -t'
-alias t-attach-d='tmux attach -d -t'
-alias t-new='tmux new-session -s'
-alias t-list='tmux list-sessions'
-alias t-kill-s='tmux kill-server'
-alias t-kill-ss='tmux kill-session -t'
+alias t-attach='tmux attach -t' \
+    t-attach-d='tmux attach -d -t' \
+    t-new='tmux new-session -s' \
+    t-list='tmux list-sessions' \
+    t-kill-s='tmux kill-server' \
+    t-kill-ss='tmux kill-session -t'
 
 # Network
-alias net-show='nmcli connection show'
-alias net-dev='nmcli device'
-alias net-up='nmcli connection up uuid'
-alias net-deco='nmcli device disconnect'
+alias net-show='nmcli connection show' \
+      net-dev='nmcli device' \
+      net-up='nmcli connection up uuid' \
+      net-deco='nmcli device disconnect'
 
+alias ka="killall $@" \
+      sudo="su "$@"" \
+      ssu="ssu "$@"" \
+      free="free -hm" \
+      ssh="ssh -F ${XDG_CONFIG_HOME:-"$HOME/.config"}/ssh/config" \
+      so="source" \
+      k="pkill -x -9" \
+      q="exit" \
+      c="clear" \
+      f="find" \
+      tree="tree -aC" 
 
 # ---| Functions N Stuff |--- #
 
@@ -170,12 +193,12 @@ file_amount() {
 
 # ls with preferred arguments
 ls() {
-	command ls --color=auto -F1 "$@"
+	command ls --group-directories-first --color=auto -F1 "$@"
 }
 
 # cd and ls after
 cd() {
-	builtin cd "$@" && command ls --color=auto -F
+	builtin cd "$@" && command ls --group-directories-first --color=auto -F
 }
 
 # recompile completion and reload zsh

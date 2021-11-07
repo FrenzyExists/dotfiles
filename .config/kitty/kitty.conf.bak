@@ -14,7 +14,7 @@ initial_window_width   					    600
 initial_window_height  					    300
 
 # Font
-font_family                                 Operator Mono
+font_family                                 Cartograph CF
 
 font_size 15.0
 
@@ -53,7 +53,7 @@ map ctrl+shift+end       				    scroll_end
 map ctrl+shift+h         					show_scrollback
 
 map alt+shift+enter    					new_window
-map ctrl+shift+n        					new_os_window
+map ctrl+shift+n        					new_os_window					
 map ctrl+shift+w        					close_window
 map ctrl+shift+]        					next_window
 map ctrl+shift+[        					previous_window

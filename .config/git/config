@@ -1,0 +1,16 @@
+[user]
+    email = frenzyexists@gmail.com
+    name = Detective Pikachu
+
+[core]
+    editor = $EDITOR
+    excludesfile = $HOME/.gitignore
+    pager = cat
+
+[color]
+    ui = auto
+
+[advice]
+    addIgnoredFile = false
+    detachedHead = false
+
