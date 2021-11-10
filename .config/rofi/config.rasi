@@ -1,0 +1,9 @@
+configuration {
+	modi:				    "drun";
+	display-drun: 			"";
+  	display-run: 			"";
+	drun-display-format:    "{name}";
+	sidebar-mode: 			false;
+}
+
+@theme "~/.config/rofi/styles/aquarium_dark.rasi"

@@ -1,0 +1,117 @@
+/************************************************
+ * ROFI Color theme                              *
+ * THEME: Aquarium Dark                          *
+ * User: Detective Pikachu                       *
+ * Copyright: MIT                                *
+ *************************************************/
+
+/*
+ * IMPORT AQUARIUM COLORS
+ */
+@import "../colors/aq_dark.rasi"
+
+* {
+    foreground:                     @gui05;
+ }
+
+
+ #window {
+    transparency:                   "real";
+    border:							0% 0% 1.25% 0%;
+    border-color:					@gui05;
+    height:                         48.60%;
+    width:                          31.50%;
+    location:                       south;
+ }
+
+ #mainbox {
+    children:                       [ inputbar, listview ];
+    background-color:               @gui01;
+    spacing:                       	2%;
+    border-color:					@gui03;
+    border:							0% 0% 1.75% 0%;
+ }
+
+
+
+#listview {
+    background-color:               @gui01;
+    margin: 0% 1.75% 0% 1.75%;
+    padding: 0.5% 10% 1.7% 2%;
+}
+
+#inputbar {
+    children: 						[ pika, prompt, entry ];
+    border-radius: 0% 0% 24 24;
+    border-color: @gui00;
+    background-color: @gui07;
+    expand: false;
+    border: 0 0 10;
+    padding: 6.25% 2% 1% 2%;
+}
+
+/*    padding:                        10.25% 2% 3% 15.75%;*/
+
+#pika {
+	padding:			80px;
+	width:				170px;
+	expand:				false;
+	border:				5px;
+	background-image:               url("styles/img/pika.png", height);
+}
+
+#entry {
+    placeholder:			"I Choose You!";
+    font: "Operator Mono Italic 15";
+    padding: 0% 0.8% 0% 0%;
+    border-color: @gui03;
+    border: 0 0 4;
+    background-color: @gui01; 
+    text-color:                     @gui05;
+    placeholder-color:              @gui03;
+    border-radius: 0% 10% 10% 0%;
+	expand:                         true;
+	vertical-align:			0.5;
+	margin:				72px 0 42px 0;
+}
+
+#prompt {
+    border-radius: 10% 0% 0% 10%;
+    border-color: @gui03;
+    border: 0 0 4;
+    enabled: 						true;
+    padding:                        0.8% 0.6% 0.8% 0.8%;
+    vertical-align: 0.5;
+    background-color: @gui01;
+    margin:				72px -2px 42px 30px;
+    font: "Font Awesome 5 Pro Solid 18";
+    text-color: @gui0A;
+
+}
+
+#element-text {
+    background-color: 				@gui01;
+    expand:                         true;
+    vertical-align:                 0.5;
+    text-color:                     @gui05;
+    font: "Operator Mono Medium 17";
+    margin:                         0.5% 1% 0.75% 1%;
+}
+
+#element {
+    background-color:               @gui01;
+}
+
+#element-text selected {
+text-color:                     @gui04;
+background-color: @gui00;
+
+}
+
+#element selected {
+	border:							0% 0% 0.3% 0%;
+    border-radius:                  13;
+    background-color: @gui00;
+}
+
+// vim:ft=css

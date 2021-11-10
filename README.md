@@ -27,7 +27,7 @@
 RUN THE **INSTALLATION SCRIPT**. **NOW**. ***STEAL THE DOTFILES.***
 
 ```
-git clone https://github.com/FrenzyExists/dotfiles.git
+git clone https://github.com/FrenzyExists/dotfiles.git --depth=1 --branch=mozarrella
 cd dotfiles
 chmod +x install.sh
 ./install.sh

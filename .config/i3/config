@@ -38,6 +38,48 @@ for_window [class=".*"] split toggle
 bindsym $mod+shift+z split toggle kill
 workspace_layout default
 
+# DA WINDOW
+for_window [class="^.*"] border pixel 4, title_format "<b> %class >> %title </b>"
+
+#############
+# AUTOSTART #
+#############
+
+# run with reload
+exec_always --no-startup-id xrdb -load ~/.Xresources
+
+# run once
+exec --no-startup-id xfsettingsd
+
+########
+# FONT #
+########
+font pango:Victor Mono Intalic 14
+
+# class             	border     bg	      text       indicator  child_border
+client.focused	    	#cddbf9    #cddbf9    #cddbf9    #cddbf9    #cddbf9
+client.unfocused    	#2c2e3e    #2c2e3e    #2c2e3e    #2c2e3e    #2c2e3e
+client.focused_inactive #2c2e3e    #2c2e3e    #2c2e3e    #2c2e3e    #2c2e3e
+client.urgent		    #ebb9b9    #ebb9b9    #ebb9b9    #ebb9b9    #ebb9b9
+client.placeholder	    #32302f    #32302f    #32302f    #32302f    #32302f
+client.background	    #3c3835    #3c3835    #32302f    #32302f    #32302f
+
+###########
+# SCRIPTS #
+###########
+
+# logout script
+bindsym $Mod+x exec --no-startup-id rofi_run -l
+
+# volume
+bindsym XF86AudioMute exec "sh ~/.scripts/notification/volume_pam.sh toggle"
+bindsym XF86AudioRaiseVolume exec "sh ~/.scripts/notification/volume_pam.sh up"
+bindsym XF86AudioLowerVolume exec "sh ~/.scripts/notification/volume_pam.sh down"
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous  
+
 ##############
 # FOCUS OCUS #
 ##############
@@ -59,6 +101,30 @@ bindsym $mod+Down   focus down
 bindsym $mod+Up     focus up
 bindsym $mod+Right  focus right
 
+##############
+# WORKSPACES #
+##############
+# Define names for default workspaces for which we configure key bindings later on.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+
+# switch to workspace:
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+
+# switch to next or previous workspace
+bindsym $mod+bracketleft workspace prev
+bindsym $mod+bracketright workspace next
+
+
 ########################
 # GAPS, PRAISE THE GAP #
 ########################
@@ -66,9 +132,69 @@ gaps inner 15
 gaps outer 15
 
 ########################
+# FULLSCREEN CONTAINER #
+########################
+bindsym $mod+f fullscreen toggle
+
+#######################
+# EARTH FIRE AND WIND #
+#######################
+# change container layout (stacked, tabbed, toggle split):
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+e layout toggle split
+
+# toggle tiling / floating:
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows:
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container:
+bindsym $mod+a focus parent
+
+# focus the child container:
+#bindsym $mod+d focus child
+
+########################
+# POWERSAVE BOIIIIIIII #
+########################
+exec --no-startup-id xset s 480 dpms 600 600 600
+
+########################
 # BIG BRAIN FULLSCREEN #
 ########################
 popup_during_fullscreen smart
+
+###############
+# RESIZE MODE #
+###############
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+
+        # VIM MODE
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # ARROW MODE
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # PRESS ESCAPE FOR NORMAL MODE
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 ###########################
 # RESIZE GAPS HA HA HA!!! #
@@ -118,4 +244,50 @@ new_window normal
 new_float  normal
 
 bindsym $Mod+shift+b border toggle
+
+######################
+# FLOATING WEEEEEEEE #
+######################
+
+# set floating (nontiling)for apps needing it:
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+
+# set floating (nontiling) for special apps:
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nitrogen"] floating disable
+for_window [class="nmtui"] floating enable
+for_window [class="nmtui-connect"] floating enable
+for_window [class="nmtui-edit"] floating enable
+for_window [class="nmtui-hostname"] floating enable
+
+# resize floating windows with mouse scroll:
+bindsym --whole-window --border $mod+button4 resize shrink height 5 px or 5 ppt
+bindsym --whole-window --border $mod+button5 resize grow height 5 px or 5 ppt
+bindsym --whole-window --border $mod+shift+button4 resize shrink width 5 px or 5 ppt
+bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 ppt
+
+##################
+# RELOAD AMMO!!! #
+##################
+
+# reload the configuration file:
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3):
+bindsym $mod+Shift+r restart
+
+###############################################
+# DISABLE I3BLOCKS IT SUCKS POLYBAR IS BETTER #
+###############################################
+bar {
+    workspace_buttons no
+	mode invisible
+	hidden_state hide
+}
 
