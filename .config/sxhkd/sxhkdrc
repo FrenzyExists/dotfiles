@@ -134,6 +134,9 @@ super + {_,shift + }{1-6}
 alt + @F1
     rofi_run -r
 
+super + m
+    rofi_run -r
+
 # --| Resize Window - Outward |-- #
 super + alt + {h,j,k,l}
     bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}

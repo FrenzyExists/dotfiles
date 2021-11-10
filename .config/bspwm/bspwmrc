@@ -6,6 +6,10 @@
 # set root pointer
 xsetroot -cursor_name left_ptr
 
+# Fix BSPWM bug with Jetbrains App (fucking soydev)
+export _JAVA_AWT_WM_NONREPARENTING=1
+bspc set wm_name LG3D
+
 bspc config pointer_modifier mod1
 
 # panel
@@ -14,10 +18,13 @@ tint2 &
 sh ~/.scripts/notification/hello.sh &
 
 # Wallpaper
-feh --bg-fill $HOME/Pictures/wallpapers/Aquarium/gen_1_starters_alt_3.png
+feh --bg-fill $HOME/Pictures/wallpapers/Tea\ And\ Coffee/alex-padurariu-3.jpg
 
 # key bindings
 sxhkd &
+
+# compositor
+picom &
 
 # Mice bindings
 #   Set mouse 1 to move floating windows
@@ -39,7 +46,7 @@ setxkbmap -option caps:swapescape
 ~/eww/target/release/eww daemon &
 
 # panel
-#zsh ~/.config/polybar/launch.sh
+zsh ~/.config/polybar/launch.sh
 
 # Set some bsp specific stuff
 bspc monitor -d I II III IV V VI

@@ -44,6 +44,8 @@ alias ll='ls -lAh'
 # Grep
 alias grep='grep --color=auto'
 
+export _JAVA_AWT_WM_NONREPARTENTING=1
+
 # Update thingy
 alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mirror-update='sudo reflector --verbose --score 100 -l 50 -f 10 --sort rate --save /etc/pacman.d/mirrorlist'
@@ -115,7 +117,7 @@ alias v="nvim"
 
 # Configs
 # "${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}
-alias config="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}.zshrc" \
+alias config="${EDITOR:-"$(command -v nvim)"} $HOME/.zshrc" \
       c-bspwm="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/bspwm/bspwmrc" \
       c-sxhkd="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/sxhkd/sxhkdrc" \
       c-nvim-o="${EDITOR:-"$(command -v nvim)"} ${XDG_CONFIG_HOME:-"$HOME/.config"}/.config/nvim/lua/options.lua" \
@@ -158,8 +160,7 @@ alias net-show='nmcli connection show' \
       net-deco='nmcli device disconnect'
 
 alias ka="killall $@" \
-      sudo="su "$@"" \
-      ssu="ssu "$@"" \
+      s="sudo $@" \
       free="free -hm" \
       ssh="ssh -F ${XDG_CONFIG_HOME:-"$HOME/.config"}/ssh/config" \
       so="source" \
