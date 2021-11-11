@@ -30,11 +30,24 @@ enable-ipc = true
 width = 100%
 wm-restack = bspwm
 monitor = eDP1
-font-0 = Cartograph CF:style=SemiBold:pixelsize=13;3
-font-1 = Font Awesome 5 Free Solid:size=8;1
-font-2 = Font Awesome 5 Free Solid:size=14;3
+# T1
+font-0 = Operator Mono:style=Medium Italic:pixelsize=14;3
+
+# T2
+font-1 = Font Awesome 5 Pro Solid:size=8;1
+
+# T3
+font-2 = Font Awesome 5 Pro Solid:size=13;4
+
+# T4
 font-3 = UbuntuMono Nerd Font:style=Regular:size=30;6
+
+# T5
 font-4 = UbuntuMono Nerd Font:style=Regular:size=20;4
+
+# T6
+font-5 = Font Awesome 5 Pro Solid:size=23;4
+
 
 
 # ---| Bottom Bar (BSPWM) |--- #
@@ -53,7 +66,7 @@ background = #000f0f0f
 # ---| Bottom Bar (BSPWM) |--- #
 [bar/bottomboi]
 inherit = bar/base
-modules-right = memory cpu center-border-two filesystem
+modules-right = memory center-border-two cpu center-border-two filesystem
 modules-left = keyboard center-border-two speed
 
 height = 26
@@ -66,14 +79,25 @@ background = ${color.gui07}
 
 [bar/top]
 inherit = bar/base
-font-0 = Cartograph CF:style=SemiBold:pixelsize=13;4
-font-1 = Font Awesome 5 Free Solid:size=8;1
-font-2 = Font Awesome 5 Free Solid:size=14;4
+
+# T3
+font-2 = Font Awesome 5 Pro Solid:size=14;4
+
+# T4
 font-3 = UbuntuMono Nerd Font:style=Regular:size=24.1;5.2
-font-4 = UbuntuMono Nerd Font:style=Regular:size=20;4
-font-5 = Font Awesome 5 Pro Solid:size=16;4.4
-font-6 = Font Awesome 5 Pro Solid:size=12;4.5
-font-7 = Agave Nerd Font:size=18;4
+
+# T5
+font-4 = JuliaMono Nerd Font:style=Regular:size=16;7
+
+# T6
+font-5 = JuliaMono Nerd Font:style=Regular:size=20;4.5
+#font-1 = Font Awesome 5 Pro Solid:size=8;1
+#font-2 = Font Awesome 5 Pro Solid:size=14;4
+#font-3 = UbuntuMono Nerd Font:style=Regular:size=24.1;5.2
+#font-4 = UbuntuMono Nerd Font:style=Regular:size=20;4
+#font-5 = Font Awesome 5 Pro Solid:size=16;4.4
+#font-6 = Font Awesome 5 Pro Solid:size=12;4.5
+#font-7 = JuliaMono Nerd Font:style=Regular:size=18;6
 
 background = ${color.gui00}
 border-color = ${color.gui00}
