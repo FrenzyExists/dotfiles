@@ -45,11 +45,7 @@ startup_screen = visualizer
 #execute_on_song_change=~/.scripts/notification/ncmpcpp.sh
 
 # --| Progress Bar look |-- #
-#progressbar_look = " •"
-#progressbar_look = "▂▂▂"
-progressbar_look = "─◾"
-#progressbar_look = "━━━"
-#progressbar_look = "•••"
+progressbar_look = "━━"
 progressbar_color = "black"
 progressbar_elapsed_color = 7
 
@@ -112,11 +108,11 @@ visualizer_spectrum_smooth_look = no
 #visualizer_look = "▮▍"
 #visualizer_look = "▍▍"
 #visualizer_look = "││"
-visualizer_look = "▮▮"
+#visualizer_look = "▮▮"
 #visualizer_look = "▋▋"
 #visualizer_look = "●┃"
 #visualizer_look = "+|"
-#visualizer_look = "▄▍"
+visualizer_look = "▄▍"
 #visualizer_look = "●●"
 #visualizer_look = "●▗"
 #visualizer_look = ""

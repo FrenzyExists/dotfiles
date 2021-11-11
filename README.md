@@ -12,8 +12,10 @@
 
 <p>
 
+### BSPWM
+
 <p align="center">
-  <img src="screenshots/screenshot_2.png">
+  <img src="screenshots/pic_1.png">
 </p>
 
 <img src="https://preview.redd.it/wvozufpd9vi71.png?width=960&crop=smart&auto=webp&s=10e0eb8e8597b14d5993f2cec1b8a512951695b2" alt="nord-icon" align="center">
