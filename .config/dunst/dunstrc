@@ -33,7 +33,7 @@
     notification_height = 3
 
     # You want a Gap?
-    separator_height = 1
+    separator_height = 0
 
     # Notification box padding
     padding = 24
@@ -108,28 +108,28 @@
 
 [urgency_low]
     background = "#20202A"
-    frame_color = "#caf6bb"
+    frame_color = "#313449"
     icon = "~/.config/dunst/icons/low.svg"
-    foreground="#8791a3"
+    foreground="#63718B"
     timeout = 3
 
 [urgency_normal]
     background = "#20202A"
-    frame_color = "#2c2e3e"
+    frame_color = "#313449"
     timeout = 5
-    foreground="#8791a3"
+    foreground="#63718B"
 
 [urgency_critical]
     background = "#20202A"
-    frame_color = "#ebb9b9"
+    frame_color = "#313449"
     icon = "~/.config/dunst/icons/critical.svg"
     timeout = 0
-    foreground="#8791a3"
+    foreground="#63718B"
 
 [spotify]
     body = *Spotify*
     format = "%b\n[ <span font_desc='UbuntuMono Nerd Font 20'><i>%s</i></span> ]"
-    background = "#191414"
+    background = "#20202A"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

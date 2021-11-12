@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   aria-hidden="true"
+   focusable="false"
+   data-prefix="fad"
+   data-icon="camera-polaroid"
+   role="img"
+   viewBox="0 0 576 512"
+   class="svg-inline--fa fa-camera-polaroid fa-w-18"
+   style="--fa-secondary-opacity: 0.1;"
+   version="1.1"
+   id="svg3483"
+   sodipodi:docname="screenshot.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3487" />
+  <sodipodi:namedview
+     id="namedview3485"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.2578125"
+     inkscape:cx="176.49689"
+     inkscape:cy="255.60248"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3481" />
+  <g
+     class="fa-group"
+     id="g3481">
+    <path
+       fill="currentColor"
+       d="M570.63 343.94L512 256V80a48 48 0 0 0-48-48H112a48 48 0 0 0-48 48v176L5.38 343.94A31.8 31.8 0 0 0 1.57 352h572.86a32.12 32.12 0 0 0-3.8-8.06zM288 256a64 64 0 1 1 64-64 64.1 64.1 0 0 1-64 64zm152-112a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8v-32a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8z"
+       class="fa-secondary"
+       id="path3477"
+       style="fill:#63718b;fill-opacity:1" />
+    <path
+       fill="currentColor"
+       d="M574.43 352H1.57A31.76 31.76 0 0 0 0 361.69V448a32 32 0 0 0 32 32h512a32 32 0 0 0 32-32v-86.31a31.76 31.76 0 0 0-1.57-9.69zM480 408a8 8 0 0 1-8 8H104a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8h368a8 8 0 0 1 8 8zM288 256a64 64 0 1 0-64-64 64.1 64.1 0 0 0 64 64z"
+       class="fa-primary"
+       id="path3479"
+       style="fill:#cddbf9;fill-opacity:1" />
+  </g>
+</svg>

@@ -75,26 +75,24 @@ function dunsty_boi {
 
     # The other stuff
     if [[ "$volume" == "0"  ]] ; then
-        icon_name="~/.config/dunst/icons/skull.svg"
+        icon_name="~/.scripts/notification/icons/vol_null.svg"
     else
         if [[ "$volume" -lt "30"  ]] ; then
-            icon_name="~/.config/dunst/icons/wand.svg"
+            icon_name="~/.scripts/notification/icons/vol_0.svg"
         else
             if [[ "$volume" -lt "60" ]] ; then
-                icon_name="~/.config/dunst/icons/wand_bling.svg"
+                icon_name="~/.scripts/notification/icons/vol_1.svg"
             else
                 if [[ "$volume" -lt "90" ]] ; then
-                    icon_name="~/.config/dunst/icons/spell_book.svg"
+                    icon_name="~/.scripts/notification/icons/vol_2.svg"
                 else
-                    icon_name="~/.config/dunst/icons/wizard_hat.svg"
+                    icon_name="~/.scripts/notification/icons/vol_3.svg"
                 fi
             fi
         fi
     fi
     # Send notification thing
-    #dunstify -i $icon_name -r ${ID} -a ${APPNAME} -h string:fgcolor:#ebe3ba -h string:frcolor:#ebe3ba $(bar_thingy) 
-    #dunstify -h string:fgcolor:#2c2e3e '      ' -i $icon_name -r ${ID} -a ${APPNAME} "<span foreground='#caf6bb' font_desc='UbuntuMono Nerd Font 22'><b>Volume</b></span>\n<span foreground='#ebb9b9' font_desc='Source Code Pro 23'><b>$(bar_thingy)</b></span>"
-    dunstify  -i $icon_name -r $ID -a $APPNAME -h string:fgcolor:#2c2e3e '      ' "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Vo</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>lu</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>me</b></span>\n<span foreground='#cddbf9' font_desc='Source Code Pro 23'><b>$(bar_thingy)</b></span>"
+    dunstify  -i $icon_name -r $ID -a $APPNAME -h string:fgcolor:#3D4059 '      ' "<span foreground='#EBB9B9' font_desc='Operator Mono Italic 19'>Vo</span><span foreground='#E8CCA7' font_desc='Operator Mono Italic 19'>lu</span><span foreground='#E6DFB8' font_desc='Operator Mono Italic 19'>me</span>\n<span foreground='#cddbf9' font_desc='Operator Mono 23'><b>$(bar_thingy)</b></span>"
 }
 
 
@@ -123,9 +121,8 @@ if [[ $# -gt 0 ]] ; then
             volume=$(get_volume)
             echo $volume
             if [[ "$volume" == "muted" ]] ; then
-                icon_name="~/.config/dunst/icons/skull.svg"
-                #dunstify -i "$icon_name" -r $ID -a $APPNAME -h string:fgcolor:#ebb9ba -h string:frcolor:#ebb9ba "U  D E D"
-                dunstify  -i $icon_name -r $ID -a $APPNAME -h string:fgcolor:#2c2e3e '      ' "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Vo</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>lu</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>me</b></span>\n<span foreground='#cddbf9' font_desc='Source Code Pro 23'><b> U  D E D</b></span>"
+                icon_name="~/.scripts/notification/icons/vol_mute.svg"
+                dunstify  -i $icon_name -r $ID -a $APPNAME -h string:fgcolor:#3D4059 '      ' "<span foreground='#EBB9B9' font_desc='Operator Mono Italic 19'>Vo</span><span foreground='#E8CCA7' font_desc='Operator Mono Italic 19'>lu</span><span foreground='#E6DFB8' font_desc='Operator Mono Italic 19'>me</span>\n<span foreground='#cddbf9' font_desc='Operator Mono 23'>MUTE</span>"
             else
                 dunsty_boi
             fi

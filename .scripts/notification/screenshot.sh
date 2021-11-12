@@ -92,11 +92,9 @@ done
 send_notification() {
     if >/dev/null 2>&1 command -v notify-send ; then
         if [[ "${store}" == "save" ]] ; then
-            #dunstify -i ~/.config/dunst/icons/screenshot.svg 'Screenshot saved!'
-            dunstify -h string:fgcolor:#2c2e3e '      ' -i ~/.config/dunst/icons/screenshot.svg   "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Scr</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>eens</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>hot</b></span> \n<span foreground='#cddbf9' font_desc='Cartograph CF 13'><b>Screenshot saved!</b></span>"
+            dunstify -h string:fgcolor:#3D4059 '      ' -i ~/.scripts/notification/icons/screenshot.svg "<span foreground='#EBB9B9' font_desc='Operator Mono Italic 19'><b>Scr</b></span><span foreground='#E8CCA7' font_desc='Operator Mono Italic 19'><b>eens</b></span><span foreground='#E6DFB8' font_desc='Operator Mono Italic 19'><b>hot</b></span> \n<span foreground='#cddbf9' font_desc='Operator Mono 13'><b>Screenshot saved!</b></span>"
         elif [[ "${store}" == "clip" ]] ; then
-            #dunstify -h string:fgcolor:#2c2e3e '      ' -i ~/.config/dunst/icons/clipboard.svg 'Screenshot passed to clipboard!'
-            dunstify -h string:fgcolor:#2c2e3e '      ' -i ~/.config/dunst/icons/clipboard.svg   "<span foreground='#ebb9b9' font_desc='Cartograph CF Italic 19'><b>Scr</b></span><span foreground='#ebe3b9' font_desc='Cartograph CF Italic 19'><b>eens</b></span><span foreground='#caf6bb' font_desc='Cartograph CF Italic 19'><b>hot</b></span> \n<span foreground='#cddbf9' font_desc='Cartograph CF 13'><b>Passed to clipboard!</b></span>"
+            dunstify -h string:fgcolor:#3D4059 '      ' -i ~/.scripts/notification/icons/clipboard.svg "<span foreground='#EBB9B9' font_desc='Operator Mono Italic 19'><b>Scr</b></span><span foreground='#E8CCA7' font_desc='Operator Mono Italic 19'><b>eens</b></span><span foreground='#E6DFB8' font_desc='Operator Mono Italic 19'><b>hot</b></span> \n<span foreground='#cddbf9' font_desc='Operator Mono 15'>Copied to clipboard</span>"
         fi
     fi
 }
