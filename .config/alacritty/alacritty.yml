@@ -13,7 +13,7 @@ schemes:
       foreground:        '#c8cedc'
       bright_foreground: '#a0a8b6'
       dim_foreground:    '#4c5664'
-    
+
     cursor:
       cursor: '#ebe3b9'
       text: '#20202a'
@@ -39,7 +39,7 @@ schemes:
       blue:    '#cddbf9'
       magenta: '#f6bbe7'
       cyan:    '#b8dceb'
-      white:   '#c8cedc'  
+      white:   '#c8cedc'
 
   aquarium_light: &light
     primary:
@@ -47,7 +47,7 @@ schemes:
       foreground:        '#708190'
       bright_foreground: '#9CA6B9'
       dim_foreground:    '#7F8E9D'
-    
+
     cursor:
       cursor: '#829FB0'
 
@@ -75,7 +75,7 @@ schemes:
       white:   '#D5D4E0'
 
 
-colors: 
+colors:
   *dark
 
 scrolling:
@@ -85,37 +85,34 @@ scrolling:
   auto_scroll: true
 
 window:
-  dimensions:
-    columns: 100
-    lines: 100
 
   padding:
-    x: 10
-    y: 10
+    x: 8
+    y: 4
 
 tabspaces: 4
 
 font:
   normal:
     family: Operator Mono
-    style: Medium
+    style: Regular
 
   italic:
     family: Operator Mono
-    style: Medium Italic
-    bold:
-      family: Operator Mono
-      style: Regular
-        
+    style: Italic
+  bold:
+    family: Operator Mono
+    style: Bold
+
   size: 16
   history: 10000
   offset:
-    x: -1
-    y: -2
+    x: 0
+    y: 1
     #y: 1
   glyph_offset:
     x: -1
-    y: 0
+    y: 2
 
 env:
   WINIT_X11_SCALE_FACTOR: '1.0'
