@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Lists the current directory's files in Vim,
+# so you can edit it and save to rename them
+
+# USAGE: vimv [file1 file2]
+
+# Modification of: https://github.com/thameera/vimv
+# Rewritten by Nathaniel Maia, December 2018
+#
+# Added: numerical sorting, less IO/redirection, error checking.
+
+# temp out file
+tmpof=/tmp/vimv.$$
+
+if [[ $# -ne 0 ]]; then
+    if=("$@")
+else
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'if=( $(ls -A) )'
+fi
+
+ifstr=""
+for (( i=0; i<${#if[@]}; ++i )); do
+    ifstr+="$i\t${if[$i]}\n"
+done
+
+if (( i > 0 )); then
+    printf "$ifstr" > $tmpof && ${EDITOR:-vi} $tmpof
+else
+    printf "no input paths\n"; exit 1
+fi
+
+i=0 t=0 l=-1
+IFS=$'\r\n'
+GLOBIGNORE='*'
+
+while read -r line; do
+    of="${line#*	}"
+    # Ensure: out file name > 0 chars and line num is sequence of 0,1,2,3...
+    if (( ${#of} > 0 && i == ${line%	*} && i - 1 == l )); then
+        (( l++ ))
+        if [[ "${if[i]}" != "$of" ]]; then
+            if git ls-files --error-unmatch "${if[i]}" >/dev/null 2>&1; then
+                command git mv "${if[i]}" "$of" && (( t++ ))
+            else
+                command mv "${if[i]}" "$of" && (( t++ ))
+            fi
+        fi
+    fi
+    (( i++ ))
+done <<< "$(sort -n $tmpof)"
+
+printf "%d paths renamed\n" $t
+command rm $tmpof

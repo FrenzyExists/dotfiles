@@ -18,7 +18,7 @@
  #window {
     transparency:                   "real";
     border:							0% 0% 1.25% 0%;
-    border-color:					@gui05;
+    border-color:					@gui07;
     height:                         48.60%;
     width:                          31.50%;
     location:                       south;
@@ -26,16 +26,16 @@
 
  #mainbox {
     children:                       [ inputbar, listview ];
-    background-color:               @gui01;
+    background-color:               @gui00;
     spacing:                       	2%;
-    border-color:					@gui03;
+    border-color:					@gui07;
     border:							0% 0% 1.75% 0%;
  }
 
 
 
 #listview {
-    background-color:               @gui01;
+    background-color:               @gui00;
     margin: 0% 1.75% 0% 1.75%;
     padding: 0.5% 10% 1.7% 2%;
 }
@@ -43,7 +43,7 @@
 #inputbar {
     children: 						[ pika, prompt, entry ];
     border-radius: 0% 0% 24 24;
-    border-color: @gui00;
+    border-color: @gui06;
     background-color: @gui07;
     expand: false;
     border: 0 0 10;
@@ -90,7 +90,7 @@
 }
 
 #element-text {
-    background-color: 				@gui01;
+    background-color: 				@gui00;
     expand:                         true;
     vertical-align:                 0.5;
     text-color:                     @gui05;
@@ -99,19 +99,19 @@
 }
 
 #element {
-    background-color:               @gui01;
+    background-color:               @gui00;
 }
 
 #element-text selected {
 text-color:                     @gui04;
-background-color: @gui00;
+background-color: @gui06;
 
 }
 
 #element selected {
 	border:							0% 0% 0.3% 0%;
     border-radius:                  13;
-    background-color: @gui00;
+    background-color: @gui06;
 }
 
 // vim:ft=css

@@ -15,7 +15,7 @@ margin-top = 0
 margin-bottom = 0
 
 # ---| Imports |--- #
-include-file = ~/.config/polybar/colors.ini 
+include-file = ~/.config/polybar/colors.ini
 include-file = ~/.config/polybar/modules.ini
 
 [bar]
@@ -59,7 +59,7 @@ modules-right = right-border memory left-border right-border cpu left-border rig
 height = 40
 padding = 4
 border-top-size = 5
-border-bottom-size = 12 
+border-bottom-size = 12
 bottom = true
 background = #000f0f0f
 
@@ -73,9 +73,9 @@ height = 26
 padding = 2
 border-bottom-size = 2
 border-top-size = 2
-border-color = ${color.gui07}
+border-color = ${color.gui00}
 bottom = true
-background = ${color.gui07}
+background = ${color.gui00}
 
 [bar/top]
 inherit = bar/base
@@ -96,7 +96,7 @@ background = ${color.gui00}
 border-color = ${color.gui00}
 modules-center = right-border bspwm left-border
 modules-right = right-border backlight left-border right-border battery left-border right-border pulseaudio_simple left-border right-border time left-border powermenu
-modules-left = right-border bsplayout left-border wlan center-border mpd 
+modules-left = right-border bsplayout left-border wlan center-border mpd
 height = 32
 border-top-size = 8
 border-bottom-size = 8

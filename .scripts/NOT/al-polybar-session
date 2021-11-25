@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# al-polybar-session: Polybar session launcher script for ArchLabs
+# Copyright (C) 2017 Nathaniel Maia <natemaia10@gmail.com>
+
+if ! hash polybar >/dev/null 2>&1; then
+	echo "error: al-polybar-session: polybar is required" >&2
+	exit
+elif hash xprop >/dev/null 2>&1 && [[ $DISPLAY && -z $WM ]]; then
+	ID="$(xprop -root -notype _NET_SUPPORTING_WM_CHECK)"
+	WM="$(xprop -id "${ID##* }" -notype -len 100 -f _NET_WM_NAME 8t)"
+	WM="${WM/*WM_NAME = }"
+	WM="${WM/\"}"
+	WM="${WM/\"*}"
+	WM="${WM,,}"
+fi
+
+readonly CONFPATH="$HOME/.config/polybar"
+
+if [[ -z $WM ]]; then
+	SESSIONFILE="$CONFPATH/sessions/sessionfile"
+else
+	SESSIONFILE="$CONFPATH/sessions/$WM-sessionfile"
+fi
+
+# if system is a laptop add the battery module and set a few ENV variables
+if hash laptop-detect >/dev/null 2>&1 && laptop-detect; then
+	info="$(ls -1 /sys/class/power_supply/)"
+	LAPTOP_ADAPTER="$(awk 'NR==1 {print $0}' <<< "$info")"
+	LAPTOP_BATTERY="$(awk 'NR==2 {print $0}' <<< "$info")"
+	if [[ $LAPTOP_ADAPTER && $LAPTOP_BATTERY ]]; then
+		POLYBAR_MODULES="battery coreuse temperature memory pkg net volume"
+		export POLYBAR_MODULES LAPTOP_ADAPTER LAPTOP_BATTERY
+	fi
+fi
+
+# configs setup for new users
+if [[ $USER != 'root' ]]; then
+	if grep -q 'root' "$CONFPATH/config"; then
+		sed -i "s|/root|/home/${USER}|g" "$CONFPATH/config"
+		for sfile in "$CONFPATH/sessions/"*?; do
+			sed -i "s|/root|/home/${USER}|g" "$sfile"
+		done
+	fi
+fi
+
+# command line options
+case $1 in
+    -h|--help)
+		cat <<- EOF
+		USAGE:
+		        al-polybar-session [OPTIONS] [SESSIONFILE]
+
+		OPTIONS:
+		        -h, --help      Print this usage message and exit
+		        -z, --session   Use passed sessionfile instead of default
+
+		EXAMPLES:
+
+		    Run the default session
+
+		        al-polybar-session &
+
+
+		    Load a session saved in ~/.sessionfile
+
+		        al-polybar-session -z ~/.sessionfile
+
+
+		Sessions are handled on a per WM basis, for each WM a sessionfile will be created
+		The script will launch the right session for each WM
+		Bars in a session can be chosen by running "al-polyzen" or manually configure the sessionfile
+
+
+		To have session run at startup add the following line to your autostart:
+
+		        al-polybar-session &
+		EOF
+		exit 0
+		;;
+	-z|--session)
+		if [[ -s "$2" ]]; then
+			SESSIONFILE="$2"
+		else
+			echo "error: al-polybar-session: invalid sessionfile" >&2
+			exit 1
+		fi
+		;;
+esac
+
+if [[ -x "$HOME/bin/check-update" ]]; then
+	{ pgrep check-update && kill "$(pgrep check-update)"; } >/dev/null 2>&1
+	"$HOME/bin/check-update" &
+fi
+
+if [[ -x "$HOME/bin/check-network" ]]; then
+	{ pgrep check-network && kill "$(pgrep check-network)"; } >/dev/null 2>&1
+	"$HOME/bin/check-network" &
+fi
+
+if [[ -e $SESSIONFILE ]]; then
+	while pidof polybar >/dev/null 2>&1; do
+		pkill polybar
+	done
+	while read -r config bar; do
+		if [[ $config != "#"* && $config && $bar && -e $config ]]; then
+			polybar --reload --config="$config" "$bar" &
+		fi
+	done < "$SESSIONFILE"
+else
+	echo "error: al-polybar-session: unable to find sessionfile, run 'al-polyzen' to setup one" >&2
+	exit 1
+fi
+
+exit 0

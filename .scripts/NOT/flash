@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# simple flash drive imaging
+
+set -eu
+declare -a DEVS=()
+declare -g ISO="" DRIVE="" LABEL="" FORCE=false
+
+die()
+{
+    printf "%s\n" "$1"; sleep 1; exit "${2:-0}"
+}
+
+for arg in "$@"; do
+	case $arg in
+		--help|-h) printf "usage: %s <iso|img> [-f,--force]\n" "$0"; exit 0 ;;
+		--force|-f) FORCE=true ;;
+		*)
+			if [[ -f $arg && ($arg == *.iso || $arg == *.img) ]]; then
+				ISO="$arg"
+			elif [[ -b $arg && $arg == /dev/* ]]; then
+				DRIVE="$arg"
+			fi
+			;;
+	esac
+done
+
+if [[ $ISO ]]; then
+	if [[ -z $DRIVE ]]; then
+		while read -r line; do
+			DEVS+=("$line")
+		done < <(lsblk -lno NAME,SIZE,TRAN,TYPE | awk '/disk/ && /usb/ && /[0-9.]*G/ { if ($2 < 64) print "/dev/" $1 }')
+		(( ( devcount=${#DEVS[@]} ) > 0 )) || die "No eligible devices.. Exiting" 1
+		if (( devcount == 1 )); then
+			printf "Only one available device: %s\n\n" "${DEVS[*]}"
+			DRIVE="${DEVS[*]}"
+		else
+			PS3=$'\n'"device: "
+			select DRIVE in "${DEVS[@]}"; do
+				[[ $DRIVE ]] && break || die "No valid device entered... Exiting" 1
+			done
+		fi
+	fi
+
+	LABEL="$(lsblk -lno MODEL "$DRIVE")"
+	LABEL="${LABEL/%  /}"
+
+	if [[ $DRIVE && $ISO ]]; then
+		if [[ $FORCE != true ]]; then
+			printf "ALL DATA on %s - %s will be destroyed!!\n" "$DRIVE" "${LABEL:-unknown}"
+			read -re -p $'\nDo you want to continue? [y/N]: ' yn
+			[[ $yn =~ [yY] ]] || exit 0
+		fi
+		if (( UID )); then
+			su -c "dd if='$ISO' of=$DRIVE bs=4M status='progress'"
+		else
+			dd if="$ISO" of="$DRIVE" bs=4M status="progress"
+		fi
+	fi
+else
+	printf "No file to flash\n\nusage: %s <iso|img> [-f,--force]\n" "$0"
+	exit 1
+fi

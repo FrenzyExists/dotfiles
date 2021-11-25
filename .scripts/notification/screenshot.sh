@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Frenzy's dunst maim notification
 
@@ -7,10 +7,10 @@ welcome() {
 
 ███████  ██████ ██████  ███████ ███████ ███    ██ ███████ ██   ██  ██████  ████████ 
 ██      ██      ██   ██ ██      ██      ████   ██ ██      ██   ██ ██    ██    ██    
-███████ ██      ██████  █████   █████   ██ ██  ██ ███████ ███████ ██    ██    ██    
-     ██ ██      ██   ██ ██      ██      ██  ██ ██      ██ ██   ██ ██    ██    ██    
-███████  ██████ ██   ██ ███████ ███████ ██   ████ ███████ ██   ██  ██████     ██    
-                                                                                    
+███████ ██      ██████  █████   █████   ██ ██  ██ ███████ ███████ ██    ██    ██ 
+     ██ ██      ██   ██ ██      ██      ██  ██ ██      ██ ██   ██ ██    ██    ██ 
+███████  ██████ ██   ██ ███████ ███████ ██   ████ ███████ ██   ██  ██████     ██ 
+                                                                                 
 
 version 0.1: All of you
 
@@ -21,7 +21,7 @@ Dependencies:
 Options:
   --store  | -s   -- How you want to store:
             -> clip
-            -> save -> if you want to save a second param could be input 
+            -> save -> if you want to save a second param could be input
             for the path
 
   --mode   | -m   -- How you want to take the screenshot
@@ -60,7 +60,7 @@ while test $# -gt 0 ; do
         -s|--store)
         shift
         if [[ "$1" == "clip" ]] ; then
-            store="clip"  
+            store="clip"
         elif [[ "$1" == "save" ]] ; then
             store="save"
         if [[ -d "$2"  ]] ; then
@@ -103,7 +103,7 @@ send_notification() {
 take_screenshot() {
     if [[ "${store}" == "save" ]] ; then
         if [[ "${mode}" == "select" ]] ; then
-            maim --hidecursor --select  "${path_to_save}$(date +%s.)png" 
+            maim --hidecursor --select  "${path_to_save}$(date +%s.)png"
         elif [[ "${mode}" == "full" ]] ; then
             maim --hidecursor "${path_to_save}$(date +%s).png"
         fi
