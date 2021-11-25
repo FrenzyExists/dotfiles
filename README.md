@@ -7,6 +7,9 @@
 
 <h3 align="center">Hi! These are my dotfiles</h3>
 
+### NOTICE:
+For latest dots, refer to mozarrella branch, and yes, that was a Jojo Reference
+
 ---
 
 <p>
